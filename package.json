@@ -1,0 +1,33 @@
+{
+  "name": "SurvivorPool",
+  "version": "3.0.0",
+  "description": "SurvivorPool",
+  "scripts": {
+    "test": "SET NODE_ENV=test&& karma start",
+    "start": "node server.js",
+    "dev": "SET NODE_ENV=develop&& node server.js"
+  },
+  "author": "Jimmy Timmons & Xander West Side",
+  "license": "",
+  "engines": {
+    "node": "6.11.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.16.3",
+    "firebase": "^3.6.6",
+    "firebase-admin": "^5.0.0",
+    "moment": "^2.17.1",
+    "node-env-file": "^0.1.8",
+    "node-uuid": "^1.4.7",
+    "pg": "^6.1.0",
+    "pg-hstore": "^2.3.2",
+    "request": "^2.74.0",
+    "script-loader": "^0.6.1",
+    "sequelize": "^3.5.1",
+    "sqlite": "^2.9.2",
+    "sqlite3": "^3.1.4",
+    "underscore": "^1.8.3",
+    "uuid": "^3.1.0"
+  }
+}
