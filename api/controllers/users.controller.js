@@ -57,9 +57,9 @@ var userGetCountAll = function(req, res){
 };
 
 var userCreate = function(req,res){
-    var dateCutOff = new Date('2017-09-11 22:20:00');
+    //var dateCutOff = new Date('2017-09-11 22:20:00');
     
-    if (new Date() < dateCutOff) {
+    //if (new Date() < dateCutOff) {
         var body = _.pick(req.body, 'full_name', 'email', 'user_id', 'picture_url');
         db.user.create(body)
             .then(function(user) {
@@ -75,10 +75,10 @@ var userCreate = function(req,res){
                 console.log(e);
                 res.status(400).json(e);
             });
-    } else {
+    /*} else {
         var e = {error: 'The cutoff time to sign up has passed.'};
         res.status(401).json(e);
-    }       
+    }*/       
 };
 
 var updateEmail = function(req, res) {
