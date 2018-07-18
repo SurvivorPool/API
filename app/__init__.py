@@ -12,6 +12,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 api = Api(app)
 
+from app import routes
 from resources.game import Game, GamesList
 
 api.add_resource(Game, '/game')
