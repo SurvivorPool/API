@@ -16,7 +16,6 @@ class GameModel(db.Model):
     game_date = db.Column(db.DateTime)
     quarter = db.Column(db.String(3))
     week = db.Column(db.Integer)
-    test_column = db.Column(db.Integer, default=55)
 
     def __init__(self, game_id, home_team_name, home_team_city_abbr, home_team_score,
                 away_team_name, away_team_city_abbr, away_team_score,
