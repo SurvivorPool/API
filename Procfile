@@ -1,1 +1,1 @@
-web: uwsgi uwsgi.ini
+web: flask db upgrade; uwsgi uwsgi.ini; 
