@@ -10,10 +10,9 @@ class Game(Resource):
         return {'game': a.json()}
 
 
-
 class GamesList(Resource):
-    def get(self):
-        return {'games': [game.json() for game in GameModel.query.all()]}
+    def get(self, weekNum):
+        return GameModel.get_games_by_week(weekNum)
 
     def put(self, weekNum):
         xml = urllib.request.urlopen(
