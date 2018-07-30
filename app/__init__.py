@@ -14,6 +14,10 @@ api = Api(app)
 
 from app import routes
 from resources.game import Game, GamesList
+from resources.user import User
+from resources.playerTeams import PlayerTeam
 
 api.add_resource(Game, '/game')
 api.add_resource(GamesList, '/games/<string:weekNum>')
+api.add_resource(User, '/user/<string:user_id>')
+api.add_resource(PlayerTeam, '/player_team')
