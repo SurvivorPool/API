@@ -20,4 +20,4 @@ from resources.playerTeams import PlayerTeam
 api.add_resource(Game, '/game')
 api.add_resource(GamesList, '/games/<string:weekNum>')
 api.add_resource(User, '/user/<string:user_id>')
-api.add_resource(PlayerTeam, '/player_team')
+api.add_resource(PlayerTeam, '/player_team/<string:team_id>')
