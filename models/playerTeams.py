@@ -1,6 +1,5 @@
 from app import db
 from models.user import UserModel
-from models.league import LeagueModel
 
 class PlayerTeamModel(db.Model):
     __tablename__ = 'player_teams'
@@ -18,6 +17,7 @@ class PlayerTeamModel(db.Model):
 
     user = db.relationship('UserModel')
     league = db.relationship('LeagueModel')
+    team_picks = db.relationship('PickModel')
 
     def __init__(self, user_id, league_id, team_name):
         self.user_id = user_id
@@ -27,19 +27,26 @@ class PlayerTeamModel(db.Model):
         self.has_paid = False
 
     def json(self):
-        user = UserModel.find_by_user_id(self.user_id)
-        league = LeagueModel.find_league_by_id(self.league_id)
         return {
             'team_id': self.team_id,
-            'user_info': user.user_json(),
-            'league_info': league.json_league_info(),
+            'user_info': self.user.user_json(),
+            'league_info': self.league.json_league_info(),
+            'team_name': self.team_name,
+            'is_active': self.is_active,
+            'has_paid': self.has_paid
+        }
+
+    def json_basic(self):
+        return {
+            'team_id': self.team_id,
+            'user_info': self.user.user_json(),
             'team_name': self.team_name,
             'is_active': self.is_active,
             'has_paid': self.has_paid
         }
 
     def upsert(self):
-        db.session.add(self)        
+        db.session.add(self)
         db.session.commit()
 
     def delete(self):
