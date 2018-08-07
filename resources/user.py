@@ -6,7 +6,6 @@ from models.league import LeagueModel
 class User(Resource):
 
     def get(self, user_id):
-        print(user_id)
         user = UserModel.find_by_user_id(user_id)
         return user.json()
 

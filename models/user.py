@@ -8,7 +8,7 @@ class UserModel(db.Model):
     email = db.Column(db.String(45), unique=True)
     is_admin = db.Column(db.Boolean)
     picture_url = db.Column(db.String(200))
-    teams = db.relationship("PlayerTeamModel")
+    teams = db.relationship('PlayerTeamModel')
 
     def __init__(self, user_id, full_name, email, picture_url):
         self.user_id = user_id
@@ -31,7 +31,7 @@ class UserModel(db.Model):
             'email': self.email,
             'is_admin': self.is_admin,
             'picture_url': self.picture_url,
-            'teams': [team.json() for team in self.teams.all()]
+            'teams': [team.json() for team in self.teams]
         }
 
     def user_json(self):
