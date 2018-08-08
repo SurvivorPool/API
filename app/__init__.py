@@ -11,11 +11,6 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 api = Api(app)
 
-import logging
-
-logging.basicConfig()
-logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
-
 from app import routes
 from resources.game import Game, GamesList
 from resources.user import User
