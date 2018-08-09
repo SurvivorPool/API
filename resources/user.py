@@ -46,5 +46,6 @@ class User(Resource):
 class UserExistence(Resource):
     def get(self, user_id):
         user = UserModel.find_by_user_id(user_id)
-        return True if user else False
+        exists = True if user else False
+        return {'exists': exists}, 200
 
