@@ -1,19 +1,20 @@
 from datetime import datetime
 import urllib.request
-from flask_restful import Resource
+from flask_restplus import Resource, fields
 import xml.etree.ElementTree as ET
 from models.game import GameModel
-
-class Game(Resource):
-    def get(self):
-        a = GameModel(1,2,3,4,5,6,7,8,9,0,1,2)
-        return {'game': a.json()}
-
+from app import api
 
 class GamesList(Resource):
+    game_swagger = api.model('Game', {
+        'weekNum': fields.String,
+    })
+
+    @api.expect(game_swagger)
     def get(self, weekNum):
         return GameModel.get_games_by_week(weekNum)
 
+    @api.expect(game_swagger)
     def put(self, weekNum):
         xml = urllib.request.urlopen(
             'http://www.nfl.com/ajax/scorestrip?season=2018&seasonType=PRE&week={}'.
