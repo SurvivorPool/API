@@ -6,8 +6,6 @@ class League(Resource):
     league_swagger = api.model('League', {
         'league_id': fields.String,
     })
-
-
     parser = reqparse.RequestParser()
     parser.add_argument('league_id', type=int)
     parser.add_argument(
@@ -27,8 +25,7 @@ class League(Resource):
 
     @api.expect(parser)
     def put(self):
-        data = parser.parse_args()
-
+        data = self.parser.parse_args()
         league = LeagueModel.find_league_by_id(data['league_id'])
 
         if league is None:

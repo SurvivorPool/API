@@ -40,7 +40,7 @@ class User(Resource):
 
     @api.expect(parser)
     def post(self):
-        data = parser.parse_args()
+        data = self.parser.parse_args()
         user = UserModel(data['user_id'], data['full_name'], data['email'], data['picture_url'])
 
         try:
