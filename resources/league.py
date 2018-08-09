@@ -1,5 +1,6 @@
 from flask_restplus import Resource, reqparse, fields
 from models.league import LeagueModel
+from models.playerTeams import PlayerTeamModel
 from app import api
 
 class League(Resource):
@@ -40,3 +41,14 @@ class League(Resource):
             return league.json()
         except:
             return {'message': 'An error occurred upserting the league'}, 500
+
+class LeaguesByUser(Resource):
+    leagues_by_user_swagger = api.model('UserLeagues', {
+        'user_id': fields.String,
+    })
+    @api.expect(leagues_by_user_swagger)
+    def get(self, user_id):
+        teams = PlayerTeamModel.find_by_user_id(user_id)
+        return {
+            'user_leagues': [team.league.json_league_info() for team in teams]
+        }

@@ -53,6 +53,11 @@ class PlayerTeamModel(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+
+    @classmethod
+    def find_by_user_id(cls, user_id):
+        return cls.query.filter_by(user_id=user_id)
+
     @classmethod
     def find_by_team_id(cls, team_id):
         return cls.query.filter_by(team_id=team_id).first()

@@ -15,7 +15,7 @@ from app import routes
 from resources.game import GamesList
 from resources.user import User, UserExistence
 from resources.playerTeams import PlayerTeam
-from resources.league import League
+from resources.league import League, LeaguesByUser
 from resources.pick import Pick
 
 api.add_resource(GamesList, '/games/<string:weekNum>')
@@ -23,4 +23,5 @@ api.add_resource(User, '/user', '/user/<string:user_id>')
 api.add_resource(UserExistence, '/user/exists/<string:user_id>')
 api.add_resource(PlayerTeam, '/player_team', '/player_team/<string:team_id>')
 api.add_resource(League, '/league', '/league/<string:league_id>')
+api.add_resource(LeaguesByUser, '/leagues/user/<string:user_id>')
 api.add_resource(Pick, '/pick')
