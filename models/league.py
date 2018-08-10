@@ -38,3 +38,7 @@ class LeagueModel(db.Model):
     @classmethod
     def find_league_by_id(cls, league_id):
         return cls.query.filter_by(league_id=league_id).first()
+
+    @classmethod
+    def find_all_leagues(cls):
+        return cls.query.all();

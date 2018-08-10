@@ -52,3 +52,10 @@ class LeaguesByUser(Resource):
         return {
             'user_leagues': [team.league.json_league_info() for team in teams]
         }
+
+class LeaguesList(Resource):
+    def get(self):
+        leagues = LeagueModel.find_all_leagues()
+        return {
+            'leagues': [league.json_league_info() for league in leagues]
+        }
