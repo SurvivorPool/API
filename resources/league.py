@@ -2,6 +2,7 @@ from flask_restplus import Resource, reqparse, fields
 from models.league import LeagueModel
 from models.playerTeams import PlayerTeamModel
 from app import api
+from authentication import login_required
 
 class League(Resource):
     league_swagger = api.model('League', {
@@ -17,14 +18,14 @@ class League(Resource):
     parser.add_argument('league_description', type=str, required=True, help='league_description cannot be null')
     parser.add_argument('price', type=int, required=True, help='price cannot be null')
 
-    @api.expect(league_swagger)
+    #@api.expect(league_swagger)
     def get(self, league_id):
         league = LeagueModel.find_league_by_id(league_id)
         if not league is None:
             return league.json()
         return {'message': 'League not found'}, 404
 
-    @api.expect(parser)
+    #@api.expect(parser)
     def put(self):
         data = self.parser.parse_args()
         league = LeagueModel.find_league_by_id(data['league_id'])
@@ -46,7 +47,7 @@ class LeaguesByUser(Resource):
     leagues_by_user_swagger = api.model('UserLeagues', {
         'user_id': fields.String,
     })
-    @api.expect(leagues_by_user_swagger)
+    #@api.expect(leagues_by_user_swagger)
     def get(self, user_id):
         teams = PlayerTeamModel.find_by_user_id(user_id)
         return {
@@ -54,6 +55,7 @@ class LeaguesByUser(Resource):
         }
 
 class LeaguesList(Resource):
+    @login_required
     def get(self):
         leagues = LeagueModel.find_all_leagues()
         return {
