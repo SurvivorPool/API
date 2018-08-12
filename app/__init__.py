@@ -4,18 +4,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
 from config import Config
-
-# import firebase_admin
-# from firebase_admin import credentials
-
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 api = Api(app)
-# cred = credentials.Certificate('serviceAccountKey.json')
-# default_app = firebase_admin.initialize_app(cred)
-
 
 from app import routes
 from resources.game import GamesList

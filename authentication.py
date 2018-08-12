@@ -5,6 +5,7 @@ from firebase_admin import auth, credentials
 from dotenv import load_dotenv
 load_dotenv(verbose=True)
 import os
+from models.user import UserModel
 
 cert = firebase_admin.credentials.Certificate({
     "type":
@@ -34,9 +35,24 @@ def login_required(f):
     @wraps(f)
     def decorated_func(*args, **kwargs):
         try:
-            print(auth.verify_id_token(request.headers['auth']))
             auth.verify_id_token(request.headers['auth'])
             return f(*args, **kwargs)
         except:
             return {'message': 'Unable to authenticate'}, 403
+    return decorated_func
+
+def admin_required(f):
+    @wraps(f)
+    def decorated_func(*args, **kwargs):
+        try:
+            request_user_info = auth.verify_id_token(request.headers['auth'])
+            user = UserModel.find_by_user_id(request_user_info['user_id'])
+
+            if not user.is_admin:
+                return {'message': 'User not an administrator.'}, 403
+
+            return f(*args, **kwargs)
+        except:
+            return {'message': 'User not an administrator.'}, 403
+
     return decorated_func
