@@ -1,11 +1,13 @@
 from functools import wraps
 from flask import request
+from flask_restplus import reqparse
 import firebase_admin
 from firebase_admin import auth, credentials
 from dotenv import load_dotenv
 load_dotenv(verbose=True)
 import os
 from models.user import UserModel
+from models.playerTeams import PlayerTeamModel
 
 cert = firebase_admin.credentials.Certificate({
     "type":
@@ -39,6 +41,39 @@ def login_required(f):
             return f(*args, **kwargs)
         except:
             return {'message': 'Unable to authenticate'}, 403
+    return decorated_func
+
+def player_team_ownership_required_url_param(f):
+    @wraps(f)
+    def decorated_func(*args, **kwargs):
+        try:
+            request_user_info = auth.verify_id_token(request.headers['auth'])
+            team = PlayerTeamModel.find_by_team_id(kwargs['team_id'])
+
+            if team is None or team.user_id != request_user_info['user_id']:
+                return {'message': 'You are not the owner of this team.'}, 403
+        except:
+            return {'message': 'Unable to authenticate'}, 403
+        return f(*args, **kwargs)
+    return decorated_func
+
+def player_team_ownership_required_json_param(f):
+    @wraps(f)
+    def decorated_func(*args, **kwargs):
+        try:
+            request_user_info = auth.verify_id_token(request.headers['auth'])
+            request_data = request.get_json()
+            team = PlayerTeamModel.find_by_team_id(request_data['team_id'])
+            if team is None:
+                return {'message': 'Team not found'}, 401
+            
+            if team.user_id != request_user_info['user_id']:
+                return {'message': 'You are not the owner of this team.'}, 403
+            
+        except:
+            return {'message': 'Unable to authenticate'}, 403
+        
+        return f(*args, **kwargs)
     return decorated_func
 
 def admin_required(f):

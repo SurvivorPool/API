@@ -1,6 +1,8 @@
 from flask_restplus import Resource, reqparse, fields
 from models.playerTeams import PlayerTeamModel
 from app import api
+from authentication import player_team_ownership_required_url_param
+
 
 class PlayerTeam(Resource):
     player_team_swagger = api.model('PlayerTeam', {
@@ -8,6 +10,7 @@ class PlayerTeam(Resource):
     })
 
     @api.expect(player_team_swagger)
+    @player_team_ownership_required_url_param
     def get(self, team_id):
         team = PlayerTeamModel.find_by_team_id(team_id)
 

@@ -16,6 +16,7 @@ from resources.user import User, UserExistence
 from resources.playerTeams import PlayerTeam
 from resources.league import League, LeaguesByUser, LeaguesList
 from resources.pick import Pick
+from resources.adminMessage import AdminMessage, AdminMessages
 
 api.add_resource(GamesList, '/games/<string:weekNum>')
 api.add_resource(User, '/user', '/user/<string:user_id>')
@@ -25,3 +26,5 @@ api.add_resource(League, '/league', '/league/<string:league_id>')
 api.add_resource(LeaguesList, '/leagues')
 api.add_resource(LeaguesByUser, '/leagues/user/<string:user_id>')
 api.add_resource(Pick, '/pick')
+api.add_resource(AdminMessage, '/admin/message/<string:user_id>', '/admin/message')
+api.add_resource(AdminMessages, '/admin/messages', methods=['GET'])
