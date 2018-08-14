@@ -1,6 +1,5 @@
 from app import db
 from models.user import UserModel
-#import models.pick as pick
 
 class PlayerTeamModel(db.Model):
     __tablename__ = 'player_teams'
@@ -34,8 +33,7 @@ class PlayerTeamModel(db.Model):
             'league_info': self.league.json_league_info(),
             'team_name': self.team_name,
             'is_active': self.is_active,
-            'has_paid': self.has_paid,
-            #'pick_required': pick.PickModel.current_week_pick_required(self.team_id)
+            'has_paid': self.has_paid
         }
 
     def json_basic(self):
@@ -44,8 +42,7 @@ class PlayerTeamModel(db.Model):
             'user_info': self.user.user_json(),
             'team_name': self.team_name,
             'is_active': self.is_active,
-            'has_paid': self.has_paid,
-            #'pick_required': pick.PickModel.current_week_pick_required(self.team_id)
+            'has_paid': self.has_paid
         }
 
     def upsert(self):
