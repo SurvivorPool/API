@@ -1,6 +1,6 @@
 from flask_restplus import Resource, reqparse, fields
 from models.user import UserModel
-from models.playerTeams import PlayerTeamModel
+from models.playerTeam import PlayerTeamModel
 from models.league import LeagueModel
 from app import api
 

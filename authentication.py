@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv(verbose=True)
 import os
 from models.user import UserModel
-from models.playerTeams import PlayerTeamModel
+from models.playerTeam import PlayerTeamModel
 
 cert = firebase_admin.credentials.Certificate({
     "type":

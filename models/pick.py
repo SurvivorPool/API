@@ -1,5 +1,5 @@
 from app import db
-from models.playerTeams import PlayerTeamModel
+import models.playerTeam as playerTeam
 from models.game import GameModel
 
 class PickModel(db.Model):
@@ -49,7 +49,18 @@ class PickModel(db.Model):
     def is_duplicate_team_pick(cls, team_id, nfl_team_name):
         week_num = GameModel.get_max_week()
         prev_picks = cls.query.filter(cls.team_id == team_id, cls.nfl_team_name == nfl_team_name, cls.week_num < week_num).first()
-        return prev_picks is not None   
+        return prev_picks is not None
+
+    @classmethod
+    def current_week_pick_required(cls, team_id):
+        team = playerTeam.PlayerTeamModel.find_by_team_id(team_id)
+        if not team.is_active:
+            return false
+
+        week = GameModel.get_max_week()
+        pick = cls.find_pick_by_week_and_team_id(week, team_id)
+
+        return pick is None
 
     @classmethod
     def find_pick_by_week_and_team_id(cls, week_num, team_id):

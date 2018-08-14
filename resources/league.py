@@ -1,6 +1,6 @@
 from flask_restplus import Resource, reqparse, fields
 from models.league import LeagueModel
-from models.playerTeams import PlayerTeamModel
+from models.playerTeam import PlayerTeamModel
 from app import api
 from authentication import login_required, admin_required
 
@@ -58,7 +58,7 @@ class LeaguesByUser(Resource):
         }
 
 class LeaguesList(Resource):
-    @login_required
+    #@login_required
     def get(self):
         leagues = LeagueModel.find_all_leagues()
         return {

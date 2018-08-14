@@ -13,7 +13,7 @@ api = Api(app)
 from app import routes
 from resources.game import GamesList
 from resources.user import User, UserExistence
-from resources.playerTeams import PlayerTeam
+from resources.playerTeam import PlayerTeam
 from resources.league import League, LeaguesByUser, LeaguesList
 from resources.pick import Pick
 from resources.adminMessage import AdminMessage, AdminMessages
