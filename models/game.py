@@ -1,4 +1,5 @@
 from datetime import datetime
+from sqlalchemy.sql.expression import func
 from app import db
 
 class GameModel(db.Model):
@@ -59,6 +60,10 @@ class GameModel(db.Model):
     def upsert(self):
         db.session.add(self)
         db.session.commit()
+
+    @classmethod
+    def get_max_week(cls):
+        return db.session.query(func.max(cls.week)).scalar()
 
     @classmethod
     def get_games_by_week(cls, week):

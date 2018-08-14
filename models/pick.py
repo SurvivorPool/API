@@ -1,5 +1,6 @@
 from app import db
 from models.playerTeams import PlayerTeamModel
+from models.game import GameModel
 
 class PickModel(db.Model):
     __tablename__ = 'picks'
@@ -14,7 +15,6 @@ class PickModel(db.Model):
     player_team = db.relationship('PlayerTeamModel' )
 
     def __init__(self, team_id, game_id, week_num, nfl_team_name):
-        self.pick_id = 1
         self.team_id = team_id
         self.game_id = game_id
         self.week_num = week_num
@@ -37,10 +37,19 @@ class PickModel(db.Model):
     def find_by_id(cls, pick_id):
         return cls.query.filter_by(pick_id=pick_id).first()
 
+    @classmethod
+    def find_team_picks(cls, team_id):
+        return cls.query.filter_by(team_id=team_id)
 
     @classmethod
     def find_previous_team_picks(cls, team_id):
-        return cls.query.filter_by(team_id=team_id)
+        return cls.query.filter(cls.team_id == team_id)
+
+    @classmethod
+    def is_duplicate_team_pick(cls, team_id, nfl_team_name):
+        week_num = GameModel.get_max_week()
+        prev_picks = cls.query.filter(cls.team_id == team_id, cls.nfl_team_name == nfl_team_name, cls.week_num < week_num).first()
+        return prev_picks is not None   
 
     @classmethod
     def find_pick_by_week_and_team_id(cls, week_num, team_id):
