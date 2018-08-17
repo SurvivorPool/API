@@ -1,8 +1,10 @@
 from flask_restplus import Resource, reqparse
 
 import models
+import controllers
 PickModel = models.PickModel
 GameModel = models.GameModel
+GameController = controllers.GameController
 
 
 class Pick(Resource):
@@ -20,6 +22,15 @@ class Pick(Resource):
     def put(self):
         data = self.parser.parse_args()
         week = GameModel.get_max_week()
+        GameController.update_games(week)
+
+        game = GameModel.find_by_game_id(data['game_id'])
+
+        if game.quarter != 'P':
+            return {
+                'message':
+                'This game has already started. Please try a different game.'
+            }, 403
 
         if (PickModel.is_duplicate_team_pick(data['team_id'],
                                              data['nfl_team_name'])):
