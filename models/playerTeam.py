@@ -1,15 +1,15 @@
-from app import db
+import app
 from models.user import UserModel
+
+db = app.db
+
 
 class PlayerTeamModel(db.Model):
     __tablename__ = 'player_teams'
 
     team_id = db.Column(db.Integer, primary_key=True, nullable=False)
     league_id = db.Column(
-        db.Integer,
-        db.ForeignKey('leagues.league_id'),
-        nullable=False
-    )
+        db.Integer, db.ForeignKey('leagues.league_id'), nullable=False)
     user_id = db.Column(db.String(45), db.ForeignKey('users.user_id'))
     team_name = db.Column(db.String(20), unique=True)
     is_active = db.Column(db.Boolean, default=True)
@@ -52,7 +52,6 @@ class PlayerTeamModel(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
-
 
     @classmethod
     def find_by_user_id(cls, user_id):

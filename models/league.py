@@ -1,4 +1,6 @@
-from app import db
+import app
+db = app.db
+
 
 class LeagueModel(db.Model):
     __tablename__ = 'leagues'
@@ -41,4 +43,4 @@ class LeagueModel(db.Model):
 
     @classmethod
     def find_all_leagues(cls):
-        return cls.query.all();
+        return cls.query.all()

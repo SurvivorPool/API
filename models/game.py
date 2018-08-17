@@ -1,6 +1,8 @@
 from datetime import datetime
 from sqlalchemy.sql.expression import func
-from app import db
+import app
+db = app.db
+
 
 class GameModel(db.Model):
     __tablename__ = 'games'
@@ -11,16 +13,16 @@ class GameModel(db.Model):
     home_team_score = db.Column(db.Integer, default=0)
     away_team_name = db.Column(db.String(45))
     away_team_city_abbr = db.Column(db.String(10))
-    away_team_score = db.Column(db.Integer,default=0)
+    away_team_score = db.Column(db.Integer, default=0)
     day_of_week = db.Column(db.String(3))
     time = db.Column(db.String(5))
     game_date = db.Column(db.DateTime)
     quarter = db.Column(db.String(3))
     week = db.Column(db.Integer)
 
-    def __init__(self, game_id, home_team_name, home_team_city_abbr, home_team_score,
-                away_team_name, away_team_city_abbr, away_team_score,
-                day_of_week, time, game_date, quarter, week):
+    def __init__(self, game_id, home_team_name, home_team_city_abbr,
+                 home_team_score, away_team_name, away_team_city_abbr,
+                 away_team_score, day_of_week, time, game_date, quarter, week):
         self.game_id = game_id
         self.home_team_name = home_team_name
         self.home_team_city_abbr = home_team_city_abbr
@@ -67,4 +69,6 @@ class GameModel(db.Model):
 
     @classmethod
     def get_games_by_week(cls, week):
-        return {'games': [game.json() for game in cls.query.filter_by(week=week)]}
+        return {
+            'games': [game.json() for game in cls.query.filter_by(week=week)]
+        }

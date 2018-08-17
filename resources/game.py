@@ -1,7 +1,7 @@
 from flask_restplus import Resource, fields
-from models.game import GameModel
 from controllers.game import GameController
-from app import api
+import app
+api = app.api
 
 
 class GamesList(Resource):

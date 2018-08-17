@@ -1,4 +1,6 @@
-from app import db
+import app
+db = app.db
+
 
 class AdminMessageModel(db.Model):
     __tablename__ = 'admin_messages'

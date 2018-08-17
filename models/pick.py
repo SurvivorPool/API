@@ -1,18 +1,22 @@
-from app import db
+import app
 import models.playerTeam as playerTeam
 from models.game import GameModel
+
+db = app.db
+
 
 class PickModel(db.Model):
     __tablename__ = 'picks'
 
-    pick_id = db.Column(db.Integer, nullable=False,  primary_key=True)
+    pick_id = db.Column(db.Integer, nullable=False, primary_key=True)
     team_id = db.Column(
         db.Integer, db.ForeignKey('player_teams.team_id'), nullable=False)
-    game_id = db.Column(db.Integer, db.ForeignKey('games.game_id'), nullable=False)
+    game_id = db.Column(
+        db.Integer, db.ForeignKey('games.game_id'), nullable=False)
     week_num = db.Column(db.Integer, nullable=False)
     nfl_team_name = db.Column(db.String(30), nullable=False)
 
-    player_team = db.relationship('PlayerTeamModel' )
+    player_team = db.relationship('PlayerTeamModel')
 
     def __init__(self, team_id, game_id, week_num, nfl_team_name):
         self.team_id = team_id
@@ -48,7 +52,9 @@ class PickModel(db.Model):
     @classmethod
     def is_duplicate_team_pick(cls, team_id, nfl_team_name):
         week_num = GameModel.get_max_week()
-        prev_picks = cls.query.filter(cls.team_id == team_id, cls.nfl_team_name == nfl_team_name, cls.week_num < week_num).first()
+        prev_picks = cls.query.filter(cls.team_id == team_id,
+                                      cls.nfl_team_name == nfl_team_name,
+                                      cls.week_num < week_num).first()
         return prev_picks is not None
 
     @classmethod

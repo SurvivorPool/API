@@ -1,4 +1,7 @@
-from app import db
+import app
+
+db = app.db
+
 
 class UserModel(db.Model):
     __tablename__ = 'users'

@@ -1,32 +1,39 @@
 from flask_restplus import Resource, reqparse
-from models.pick import PickModel
-from models.game import GameModel
+
+import models
+PickModel = models.PickModel
+GameModel = models.GameModel
+
 
 class Pick(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('team_id', type=int, required=True, help='team_id cannot be null')
+    parser.add_argument(
+        'team_id', type=int, required=True, help='team_id cannot be null')
     parser.add_argument(
         'nfl_team_name',
         type=str,
         required=True,
         help='nfl_team_name cannot be null')
-    parser.add_argument('game_id', type=int, required=True, help='game_id cannot be null')
+    parser.add_argument(
+        'game_id', type=int, required=True, help='game_id cannot be null')
 
     def put(self):
         data = self.parser.parse_args()
         week = GameModel.get_max_week()
 
-        if (PickModel.is_duplicate_team_pick(data['team_id'], data['nfl_team_name'])):
+        if (PickModel.is_duplicate_team_pick(data['team_id'],
+                                             data['nfl_team_name'])):
             return {'message': "You've already chosen this team."}, 401
 
         pick = PickModel.find_pick_by_week_and_team_id(week, data['team_id'])
 
         if pick is None:
-            pick = PickModel(data['team_id'], data['game_id'], week, data['nfl_team_name'])
+            pick = PickModel(data['team_id'], data['game_id'], week,
+                             data['nfl_team_name'])
         else:
             pick.game_id = data['game_id']
             pick.nfl_team_name = data['nfl_team_name']
-        
+
         try:
             pick.upsert()
         except:
