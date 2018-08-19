@@ -65,9 +65,10 @@ class LeaguesByUser(Resource):
     @api.expect(leagues_by_user_swagger)
     @login_required
     def get(self, user_id):
-        teams = PlayerTeamModel.find_by_user_id(user_id)
+        leagueSet = PlayerTeamModel.get_unique_leagues_for_user(user_id)
         return {
-            'user_leagues': [team.league.json_league_info() for team in teams]
+            'user_leagues':
+            [league.json_league_info() for league in leagueSet]
         }
 
 

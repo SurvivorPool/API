@@ -60,3 +60,14 @@ class PlayerTeamModel(db.Model):
     @classmethod
     def find_by_team_id(cls, team_id):
         return cls.query.filter_by(team_id=team_id).first()
+
+    @classmethod
+    def get_unique_leagues_for_user(cls, user_id):
+        teams = cls.find_by_user_id(user_id)
+
+        leagues = []
+
+        for team in teams:
+            leagues.append(team.league)
+        leagueSet = set(leagues)
+        return leagueSet
