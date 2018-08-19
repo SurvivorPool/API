@@ -1,5 +1,6 @@
 from flask_restplus import Resource, reqparse, fields
 import models
+import authentication
 
 AdminMessageModel = models.AdminMessageModel
 
@@ -22,10 +23,12 @@ class AdminMessage(Resource):
         required=True,
         help='message_type cannot be null')
 
+    @authentication.login_required
     def get(self, message_id):
         message = AdminMessageModel.find_message_by_id(message_id)
         return message.json()
 
+    @authentication.admin_required
     def put(self):
         data = self.parser.parse_args()
         message = AdminMessageModel.find_message_by_id(data['message_id'])
@@ -48,6 +51,7 @@ class AdminMessage(Resource):
 
 
 class AdminMessages(Resource):
+    @authentication.login_required
     def get(self):
         messages = AdminMessageModel.find_all_active_messages()
         return {'messages': [message.json() for message in messages]}

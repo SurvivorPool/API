@@ -72,7 +72,7 @@ class LeaguesByUser(Resource):
 
 
 class LeaguesList(Resource):
-    #@login_required
+    @login_required
     def get(self):
         leagues = LeagueModel.find_all_leagues()
         return {'leagues': [league.json_league_info() for league in leagues]}

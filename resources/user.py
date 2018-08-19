@@ -1,6 +1,7 @@
 from flask_restplus import Resource, reqparse, fields
 import app
 import models
+import authentication
 
 api = app.api
 UserModel = models.UserModel
@@ -26,6 +27,7 @@ class User(Resource):
     parser.add_argument('picture_url', type=str)
 
     @api.expect(user_swagger)
+    @authentication.login_required
     def get(self, user_id):
         user = UserModel.find_by_user_id(user_id)
         return user.json()

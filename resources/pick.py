@@ -2,6 +2,8 @@ from flask_restplus import Resource, reqparse
 
 import models
 import controllers
+import authentication
+
 PickModel = models.PickModel
 GameModel = models.GameModel
 GameController = controllers.GameController
@@ -19,6 +21,8 @@ class Pick(Resource):
     parser.add_argument(
         'game_id', type=int, required=True, help='game_id cannot be null')
 
+    @authentication.login_required
+    @authentication.player_team_ownership_required_json_param
     def put(self):
         data = self.parser.parse_args()
         week = GameModel.get_max_week()
