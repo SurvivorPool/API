@@ -25,3 +25,4 @@ api.add_resource(resources.Pick, '/pick')
 api.add_resource(resources.AdminMessage, '/admin/message/<string:user_id>',
                  '/admin/message')
 api.add_resource(resources.AdminMessages, '/admin/messages', methods=['GET'])
+api.add_resource(resources.AdminGames, '/admin/games', methods=['PUT'])

@@ -17,20 +17,22 @@ class LeagueModel(db.Model):
         self.price = price
 
     def json(self):
+        price = self.price / 100
         return {
             'league_id': self.league_id,
             'league_name': self.league_name,
             'league_description': self.league_description,
-            'price': self.price,
+            'price': "{:,.2f}".format(price),
             'teams': [team.json_basic() for team in self.teams]
         }
 
     def json_league_info(self):
+        price = self.price / 100
         return {
             'league_id': self.league_id,
             'league_name': self.league_name,
             'league_description': self.league_description,
-            'price': self.price
+            'price': "{:,.2f}".format(price),
         }
 
     def upsert(self):

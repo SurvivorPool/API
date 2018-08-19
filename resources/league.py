@@ -48,7 +48,7 @@ class League(Resource):
         else:
             league.league_name = data['league_name']
             league.league_description = data['league_description']
-            league.price = data['price']
+            league.price = int(data['price']) * 100
 
         try:
             league.upsert()

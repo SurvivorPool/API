@@ -9,7 +9,22 @@ class GameController():
     nfl_endpoint = 'http://www.nfl.com/ajax/scorestrip?season=2018&seasonType=PRE&week={}'
 
     @classmethod
+    def populate_games(cls):
+        currentWeek = GameModel.get_max_week()
+        currentGames = GameModel.get_games_by_week(currentWeek)
+
+        for game in currentGames:
+            if game.quarter != 'F' and game.quarter != 'FO':
+                return {'message': 'not all games completed yet.'}, 401
+
+        weekNum = GameModel.get_max_week() + 1
+        return update_games(weekNum)
+
+    @classmethod
     def update_games(cls, weekNum):
+        if (int(weekNum) > int(GameModel.get_max_week())):
+            return {'message': 'week not populated yet.'}
+
         xml = urllib.request.urlopen(cls.nfl_endpoint.format(weekNum)).read()
         gamesXML = ET.fromstring(xml)
 
