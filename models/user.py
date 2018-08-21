@@ -24,8 +24,11 @@ class UserModel(db.Model):
         return '<User {}>'.format(self.full_name)
 
     @classmethod
+    def get_all_users(cls):
+        return cls.query.all()
+
+    @classmethod
     def find_by_user_id(cls, user_id):
-        print(user_id)
         return cls.query.filter_by(user_id=user_id).first()
 
     def json(self):
