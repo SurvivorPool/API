@@ -52,7 +52,6 @@ rope==0.11.0
 rsa==3.4.2
 six==1.11.0
 SQLAlchemy==1.2.10
-Survivor-Pool==1.0
 text-unidecode==1.2
 urllib3==1.23
 uWSGI==2.0.17.1

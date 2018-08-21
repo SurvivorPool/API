@@ -1,0 +1,18 @@
+<html>
+
+<head>
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Survivor Pool</title>
+    {% endif %}
+</head>
+
+<body>
+    <div>Microblog:
+        <a href="/index">Home</a>
+    </div>
+    <hr> {% block content %}{% endblock %}
+</body>
+
+</html>
