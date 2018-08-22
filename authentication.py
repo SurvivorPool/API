@@ -45,6 +45,21 @@ def login_required(f):
 
     return decorated_func
 
+def user_and_session_match(f):
+    @wraps(f)
+    def decorated_func(*args, **kwargs):
+        try:
+            request_user_info = auth.verify_id_token(request.headers['auth'])
+            user = UserModel.find_by_user_id(request_user_info['user_id'])
+
+            if user is None or user.user_id != (kwargs['user_id']):
+                return {'message': 'You are not the owner of this account.'}, 403
+        except:
+            return {'message': 'Unable to authenticate'}, 403
+
+        return f(*args, **kwargs)
+    return decorated_func
+
 
 def player_team_ownership_required_url_param(f):
     @wraps(f)

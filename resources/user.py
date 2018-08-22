@@ -27,7 +27,7 @@ class User(Resource):
     parser.add_argument('picture_url', type=str)
 
     @api.expect(user_swagger)
-    #@authentication.login_required
+    @authentication.user_and_session_match
     def get(self, user_id):
         user = UserModel.find_by_user_id(user_id)
         if user:
