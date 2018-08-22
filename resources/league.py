@@ -32,7 +32,7 @@ class League(Resource):
     @login_required
     def get(self, league_id):
         league = LeagueModel.find_league_by_id(league_id)
-        if not league is None:
+        if league:
             return league.json()
         return {'message': 'League not found'}, 404
 

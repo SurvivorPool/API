@@ -1,4 +1,5 @@
 import app
+from .game import  GameModel
 db = app.db
 
 
@@ -23,6 +24,7 @@ class LeagueModel(db.Model):
             'league_name': self.league_name,
             'league_description': self.league_description,
             'price': "{:,.2f}".format(price),
+            'current_week': GameModel.get_max_week(),
             'teams': [team.json_basic() for team in self.teams]
         }
 

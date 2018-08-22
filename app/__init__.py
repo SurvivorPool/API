@@ -30,7 +30,6 @@ api.add_resource(resources.AdminMessages, '/admin/messages', methods=['GET'])
 api.add_resource(resources.AdminGames, '/admin/games', methods=['PUT'])
 
 
-#sender, recipients, text_body, html_body
 @app.route('/email', methods=['GET'])
 def email_request():
     send_email('test', app.config['MAIL_USERNAME'], ['alexmberardi@gmail.com'])

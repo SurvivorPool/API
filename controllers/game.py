@@ -64,11 +64,7 @@ class GameController():
                                           game_date, quarter, weekNum)
                     gameModel.upsert()
                 else:
-                    gameModel.home_team_name = game.get('hnn')
-                    gameModel.home_team_city_abbr = game.get('h')
                     gameModel.home_team_score = game.get('hs') or 0
-                    gameModel.away_team_name = game.get('vnn')
-                    gameModel.away_team_city_abbr = game.get('v')
                     gameModel.away_team_score = game.get('vs') or 0
                     gameModel.day_of_week = game.get('d')
                     gameModel.time = game.get('t')
