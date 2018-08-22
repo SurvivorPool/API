@@ -18,7 +18,7 @@ class GameController():
                 return {'message': 'not all games completed yet.'}, 401
 
         weekNum = GameModel.get_max_week() + 1
-        return update_games(weekNum)
+        return cls.update_games(weekNum)
 
     @classmethod
     def update_games(cls, weekNum):

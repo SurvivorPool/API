@@ -38,7 +38,7 @@ class UserModel(db.Model):
             'email': self.email,
             'is_admin': self.is_admin,
             'picture_url': self.picture_url,
-            'teams': [team.json() for team in self.teams]
+            'teams': [team.json_for_user() for team in self.teams]
         }
 
     def user_json(self):

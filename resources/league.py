@@ -29,7 +29,7 @@ class League(Resource):
         'price', type=int, required=True, help='price cannot be null')
 
     @api.expect(league_swagger)
-    @login_required
+    #@login_required
     def get(self, league_id):
         league = LeagueModel.find_league_by_id(league_id)
         if not league is None:

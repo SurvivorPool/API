@@ -27,10 +27,13 @@ class User(Resource):
     parser.add_argument('picture_url', type=str)
 
     @api.expect(user_swagger)
-    @authentication.login_required
+    #@authentication.login_required
     def get(self, user_id):
         user = UserModel.find_by_user_id(user_id)
-        return user.json()
+        if user:
+            return user.json()
+
+        return {'message': 'cannot find user'}, 401
 
     @api.expect(parser)
     def post(self):

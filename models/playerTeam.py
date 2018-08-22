@@ -1,6 +1,5 @@
 import app
-from models.user import UserModel
-from models.game import GameModel
+from .game import GameModel
 db = app.db
 
 
@@ -17,7 +16,7 @@ class PlayerTeamModel(db.Model):
 
     user = db.relationship('UserModel')
     league = db.relationship('LeagueModel')
-    team_picks = db.relationship('PickModel')
+    team_picks = db.relationship('PickModel', lazy='joined')
 
     current_week = GameModel.get_max_week()
 
@@ -40,21 +39,21 @@ class PlayerTeamModel(db.Model):
 
     def json_basic(self):
         return {
-            'team_id':
-            self.team_id,
-            'user_info':
-            self.user.user_json(),
-            'team_name':
-            self.team_name,
-            'is_active':
-            self.is_active,
-            'has_paid':
-            self.has_paid,
-            'has_picked':
-            True if len([
-                current_pick for current_pick in self.team_picks
-                if current_pick.week_num == self.current_week
-            ]) > 0 else False
+            'team_id': self.team_id,
+            'user_info': self.user.user_json(),
+            'team_name': self.team_name,
+            'is_active': self.is_active,
+            'has_paid': self.has_paid
+        }
+
+    def json_for_user(self):
+        return {
+            'team_id': self.team_id,
+            'team_name': self.team_name,
+            'is_active': self.is_active,
+            'has_paid': self.has_paid,
+            'current_pick': [pick.nfl_team_name for pick in self.team_picks if pick.week_num == self.current_week],
+            'pick_history': [pick.json_basic() for pick in self.team_picks]
         }
 
     def upsert(self):

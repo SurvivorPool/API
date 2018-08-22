@@ -6,3 +6,4 @@ venv/
 serviceAccountKey.json
 *.env
 .idea/
+.idea/*

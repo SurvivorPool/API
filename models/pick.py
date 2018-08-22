@@ -32,6 +32,13 @@ class PickModel(db.Model):
             'week_num': self.week_num,
             'nfl_team_name': self.nfl_team_name
         }
+    def json_basic(self):
+        return {
+            'pick_id': self.pick_id,
+            'game_id': self.game_id,
+            'week_num': self.week_num,
+            'nfl_team_name': self.nfl_team_name
+        }
 
     def upsert(self):
         db.session.add(self)
