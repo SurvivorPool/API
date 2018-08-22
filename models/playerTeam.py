@@ -49,6 +49,7 @@ class PlayerTeamModel(db.Model):
     def json_for_user(self):
         return {
             'team_id': self.team_id,
+            'league_id': self.league_id,
             'team_name': self.team_name,
             'is_active': self.is_active,
             'has_paid': self.has_paid,
