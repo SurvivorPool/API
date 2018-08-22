@@ -10,21 +10,26 @@ class GameController():
 
     @classmethod
     def populate_games(cls):
-        currentWeek = GameModel.get_max_week()
+        currentWeek = GameModel.get_max_week() or 0
         currentGames = GameModel.get_games_by_week(currentWeek)
 
         for game in currentGames:
             if game.quarter != 'F' and game.quarter != 'FO':
                 return {'message': 'not all games completed yet.'}, 401
 
-        weekNum = GameModel.get_max_week() + 1
-        return cls.update_games(weekNum)
+        weekNum = currentWeek + 1
+        return cls.get_and_update_games(weekNum)
 
     @classmethod
     def update_games(cls, weekNum):
-        if (int(weekNum) > int(GameModel.get_max_week())):
+        max_week = GameModel.get_max_week() or 0
+        if int(weekNum) > max_week:
             return {'message': 'week not populated yet.'}
 
+        return cls.get_and_update_games(weekNum)
+
+    @classmethod
+    def get_and_update_games(cls, weekNum):
         xml = urllib.request.urlopen(cls.nfl_endpoint.format(weekNum)).read()
         gamesXML = ET.fromstring(xml)
 
@@ -78,4 +83,4 @@ class GameController():
                     gameModel.game_date = datetime.strptime(
                         yyyy_mm_dd, '%Y-%m-%d')
                     gameModel.upsert()
-        return GameModel.get_games_by_week(weekNum)
+        return GameModel.get_games_by_week_json(weekNum)

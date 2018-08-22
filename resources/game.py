@@ -19,6 +19,6 @@ class GamesList(Resource):
 
 
 class AdminGames(Resource):
-    @authentication.admin_required
+    #@authentication.admin_required
     def put(self):
         return GameController.populate_games()
