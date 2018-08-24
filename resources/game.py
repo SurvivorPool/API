@@ -1,10 +1,9 @@
 from flask_restplus import Resource, fields
 import app
-import controllers
+from controllers import GameController
 import authentication
 
 api = app.api
-#GameController = controllers.GameController
 
 
 class GamesList(Resource):
@@ -13,9 +12,9 @@ class GamesList(Resource):
     })
 
     @api.expect(game_swagger)
-    @authentication.login_required
+    #@authentication.login_required
     def get(self, weekNum):
-        return {}#GameController.update_games(weekNum)
+        return GameController.populate_games()#GameController.update_games(weekNum)
 
 
 class AdminGames(Resource):

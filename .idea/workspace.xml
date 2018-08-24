@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d025db9a-a35f-4c18-8bf1-b5e56448e72f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/app/email.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/email.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/migrations/README" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/migrations/alembic.ini" beforeDir="false" />
@@ -27,6 +27,14 @@
       <change beforePath="$PROJECT_DIR$/resources/pick.py" beforeDir="false" afterPath="$PROJECT_DIR$/resources/pick.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/playerTeam.py" beforeDir="false" afterPath="$PROJECT_DIR$/resources/playerTeam.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/resources/user.py" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/playerTeam.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/playerTeam.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/resources/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/resources/game.py" afterDir="false" />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -83,8 +91,13 @@
       <file leaf-file-name="playerTeam.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/playerTeam.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="655">
               <caret line="67" column="16" lean-forward="true" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="16" />
+=======
+            <state relative-caret-position="2268">
+              <caret line="81" column="26" lean-forward="true" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -92,6 +105,7 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="league.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/league.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -99,11 +113,21 @@
               <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
               <folding>
                 <element signature="e#0#53#0" expanded="true" />
+=======
+      <file leaf-file-name="env.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/migrations/env.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="952">
+              <caret line="34" column="41" lean-forward="true" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="pick.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/pick.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -121,10 +145,18 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="28">
               <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+=======
+      <file leaf-file-name="nfl_team.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/nfl_team.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="18" selection-start-column="18" selection-end-column="18" />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="email.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/email.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -150,6 +182,16 @@
               <caret line="4" column="45" selection-start-line="4" selection-start-column="45" selection-end-line="4" selection-end-column="45" />
               <folding>
                 <element signature="e#0#53#0" expanded="true" />
+=======
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="392">
+              <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+                <marker date="1535083634546" expanded="true" signature="537:1247" ph="..." />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
               </folding>
             </state>
           </provider>
@@ -158,8 +200,13 @@
       <file leaf-file-name="game.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/game.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="921">
               <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
+=======
+            <state relative-caret-position="252">
+              <caret line="9" column="53" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="53" />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -167,6 +214,7 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="game.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/game.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -174,16 +222,36 @@
               <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
+=======
+      <file leaf-file-name="nfl_team.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/nfl_team.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="84">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
+              <folding>
+                <element signature="e#0#36#0" expanded="true" />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="adminMessage.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/adminMessage.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="28">
               <caret line="1" column="49" selection-start-line="1" selection-start-column="49" selection-end-line="1" selection-end-column="49" />
+=======
+      <file leaf-file-name="nfl_team.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controllers/nfl_team.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="728">
+              <caret line="26" column="32" lean-forward="true" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
             </state>
           </provider>
         </entry>
@@ -194,9 +262,14 @@
     <findStrings>
       <find>get_games_by_week</find>
       <find>#@</find>
+<<<<<<< HEAD
       <find>6bc8731b6d69</find>
       <find>migrations1</find>
       <find>api</find>
+=======
+      <find>create_all</find>
+      <find>SQLALCHEMY_DATABASE_URI</find>
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
     </findStrings>
     <replaceStrings>
       <replace>migrations</replace>
@@ -212,12 +285,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/models/pick.py" />
         <option value="$PROJECT_DIR$/models/user.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/authentication.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/venv/lib/python3.6/site-packages/Survivor_Pool-1.0-py3.6.egg/resources/league.py" />
         <option value="$PROJECT_DIR$/models/league.py" />
         <option value="$PROJECT_DIR$/controllers/game.py" />
@@ -233,6 +306,22 @@
         <option value="$PROJECT_DIR$/resources/league.py" />
         <option value="$PROJECT_DIR$/resources/pick.py" />
         <option value="$PROJECT_DIR$/app/email.py" />
+=======
+        <option value="$PROJECT_DIR$/resources/user.py" />
+        <option value="$PROJECT_DIR$/venv/lib/python3.6/site-packages/Survivor_Pool-1.0-py3.6.egg/resources/league.py" />
+        <option value="$PROJECT_DIR$/models/league.py" />
+        <option value="$PROJECT_DIR$/resources/league.py" />
+        <option value="$PROJECT_DIR$/resources/game.py" />
+        <option value="$PROJECT_DIR$/controllers/game.py" />
+        <option value="$PROJECT_DIR$/resources/__init__.py" />
+        <option value="$PROJECT_DIR$/controllers/nfl_team.py" />
+        <option value="$PROJECT_DIR$/models/nfl_team.py" />
+        <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/resources/nfl_team.py" />
+        <option value="$PROJECT_DIR$/migrations/env.py" />
+        <option value="$PROJECT_DIR$/models/playerTeam.py" />
+        <option value="$PROJECT_DIR$/app/__init__.py" />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
       </list>
     </option>
   </component>
@@ -291,12 +380,22 @@
             <path>
               <item name="API" type="b2602c69:ProjectViewProjectNode" />
               <item name="API" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="API" type="b2602c69:ProjectViewProjectNode" />
+              <item name="API" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="API" type="b2602c69:ProjectViewProjectNode" />
               <item name="API" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="API" type="b2602c69:ProjectViewProjectNode" />
+              <item name="API" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -345,13 +444,21 @@
     <option name="totallyTimeSpent" value="7078000" />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="0" y="0" width="1278" height="1440" extended-state="0" />
+=======
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19483568" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Find" order="1" weight="0.18731989" />
+=======
+      <window_info anchor="bottom" id="Find" order="1" weight="0.1875" />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="11" />
@@ -369,7 +476,10 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Run" order="2" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Find" order="1" weight="0.1875" />
+=======
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.2028302" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
@@ -400,6 +510,7 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/resources/game.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -446,20 +557,99 @@
           <caret line="33" column="41" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="8" column="7" lean-forward="true" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/Survivor_Pool-1.0-py3.6.egg/resources/league.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="60" column="4" selection-start-line="60" selection-start-column="4" selection-end-line="60" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1092">
+          <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authentication.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="50" column="12" lean-forward="true" selection-start-line="50" selection-start-column="12" selection-end-line="50" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-114">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/league.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="31" column="4" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/game.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="252">
           <caret line="9" column="53" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="53" />
+=======
+        <state relative-caret-position="528">
+          <caret line="70" column="4" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="4" />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/resources/nfl_team.py" />
     <entry file="file://$PROJECT_DIR$/controllers/nfl_team.py" />
     <entry file="file://$PROJECT_DIR$/models/nfl_team.py" />
@@ -467,22 +657,67 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2268">
           <caret line="81" column="26" lean-forward="true" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
+=======
+    <entry file="file://$PROJECT_DIR$/controllers/game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="8" column="42" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/playerTeam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="11" column="69" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="69" />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="392">
           <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/models/pick.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="18" column="52" lean-forward="true" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/models/league.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="37" column="50" selection-start-line="37" selection-start-column="50" selection-end-line="37" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/leagueType.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
     <entry file="file://$PROJECT_DIR$/models/playerTeam.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1624">
@@ -565,20 +800,6 @@
     <entry file="file://$PROJECT_DIR$/uwsgi.ini">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="14" lean-forward="true" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="52" selection-start-line="8" selection-start-column="52" selection-end-line="8" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
@@ -588,8 +809,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/pick.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="39" column="47" selection-start-line="39" selection-start-column="47" selection-end-line="39" selection-end-column="47" />
+        <state relative-caret-position="504">
+          <caret line="18" column="52" lean-forward="true" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -621,6 +845,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/controllers/game.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
@@ -647,12 +872,21 @@
           <caret line="18" column="31" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/resources/league.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="31" column="4" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="140">
           <caret line="5" column="29" lean-forward="true" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
         </state>
@@ -662,22 +896,43 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+=======
+        <state relative-caret-position="605">
+          <caret line="49" column="8" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="30" />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/models/game.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="921">
           <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/resources/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="6" column="43" lean-forward="true" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/models/playerTeam.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="655">
@@ -706,22 +961,79 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
           <caret line="4" column="45" selection-start-line="4" selection-start-column="45" selection-end-line="4" selection-end-column="45" />
+=======
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="1" column="14" lean-forward="true" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/game_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
           <folding>
-            <element signature="e#0#53#0" expanded="true" />
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/conftest.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/README">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/alembic.ini">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="924">
+          <caret line="33" column="76" selection-start-line="28" selection-start-column="8" selection-end-line="33" selection-end-column="76" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/migrations/env.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="34" column="41" lean-forward="true" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/league.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="168">
           <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+=======
+        <state relative-caret-position="252">
+          <caret line="9" column="53" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="53" />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
           <folding>
             <element signature="e#0#53#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/survivorpool.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -735,6 +1047,52 @@
           <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/resources/nfl_team.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/nfl_team.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="728">
+          <caret line="26" column="32" lean-forward="true" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/nfl_team.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="18" selection-start-column="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/playerTeam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2268">
+          <caret line="81" column="26" lean-forward="true" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+            <marker date="1535083634546" expanded="true" signature="537:1247" ph="..." />
+>>>>>>> parent of f3c1d54... Revert "nfl teams work"
           </folding>
         </state>
       </provider>
