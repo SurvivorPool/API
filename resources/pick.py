@@ -1,11 +1,10 @@
 from flask_restplus import Resource, reqparse
 
-import models
+from models.pick import PickModel
+from models.game import GameModel
 import controllers
 import authentication
 
-PickModel = models.PickModel
-GameModel = models.GameModel
 GameController = controllers.GameController
 
 

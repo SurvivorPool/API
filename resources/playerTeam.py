@@ -2,9 +2,8 @@ from flask_restplus import Resource, reqparse, fields
 from authentication import player_team_ownership_required_url_param, player_team_ownership_required_json_param, login_required
 
 import app
-import models
+from models.playerTeam import PlayerTeamModel
 api = app.api
-PlayerTeamModel = models.PlayerTeamModel
 
 
 class PlayerTeam(Resource):

@@ -1,7 +1,7 @@
 from flask_mail import Message
 from flask import render_template
 from app import mail
-from models import UserModel
+from models.user import UserModel
 
 
 def send_email(subject, sender, recipients):

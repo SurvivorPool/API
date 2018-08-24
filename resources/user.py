@@ -1,13 +1,11 @@
 from flask_restplus import Resource, reqparse, fields
 import app
-import models
+from models.user import UserModel
+from models.league import LeagueModel
+from models.playerTeam import PlayerTeamModel
 import authentication
 
 api = app.api
-UserModel = models.UserModel
-PlayerTeamModel = models.PlayerTeamModel
-LeagueModel = models.LeagueModel
-
 user_swagger = api.model('User', {
     'user_id': fields.String,
 })

@@ -2,10 +2,9 @@ from flask_restplus import Resource, reqparse, fields
 from authentication import login_required, admin_required
 
 import app
-import models
+from models.league import LeagueModel
+from models.playerTeam import PlayerTeamModel
 
-LeagueModel = models.LeagueModel
-PlayerTeamModel = models.PlayerTeamModel
 api = app.api
 
 
