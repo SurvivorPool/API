@@ -10,7 +10,7 @@ class PlayerTeamModel(db.Model):
     league_id = db.Column(
         db.Integer, db.ForeignKey('leagues.league_id'), nullable=False)
     user_id = db.Column(db.String(45), db.ForeignKey('users.user_id'))
-    team_name = db.Column(db.String(100), unique=True)
+    team_name = db.Column(db.String(20), unique=True)
     is_active = db.Column(db.Boolean, default=True)
     has_paid = db.Column(db.Boolean, default=False)
 
@@ -81,6 +81,5 @@ class PlayerTeamModel(db.Model):
 
         for team in teams:
             leagues.append(team.league)
-        league_set = set(leagues)
-        return league_set
-
+        leagueSet = set(leagues)
+        return leagueSet

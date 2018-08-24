@@ -13,9 +13,9 @@ class GamesList(Resource):
     })
 
     @api.expect(game_swagger)
-    #@authentication.login_required
+    @authentication.login_required
     def get(self, weekNum):
-        return GameController.populate_games()#GameController.update_games(weekNum)
+        return GameController.update_games(weekNum)
 
 
 class AdminGames(Resource):
