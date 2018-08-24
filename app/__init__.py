@@ -32,7 +32,7 @@ api.add_resource(AdminMessage, '/admin/message/<string:user_id>',
                  '/admin/message')
 api.add_resource(AdminMessages, '/admin/messages', methods=['GET'])
 api.add_resource(AdminGames, '/admin/games', methods=['PUT'])
-api.add_resource(nflTeam, '/admin/nfl_teams/', methods=['PUT'])
+api.add_resource(nflTeam, '/admin/nfl_teams', methods=['PUT'])
 
 # @app.route('/email', methods=['GET'])
 # def email_request():
