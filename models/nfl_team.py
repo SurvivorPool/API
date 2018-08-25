@@ -8,7 +8,7 @@ class nflTeamModel(db.Model):
     abbreviation = db.Column(db.String(10), nullable=False)
     city_state = db.Column(db.String(40), nullable=False)
     full_name = db.Column(db.String(70), nullable=False)
-    nickname = db.Column(db.String(40), nullable=False)
+    nickname = db.Column(db.String(40), unique=True, nullable=False)
     conference = db.Column(db.String(5), nullable=False)
     division = db.Column(db.String(5), nullable=False)
 

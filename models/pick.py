@@ -14,9 +14,10 @@ class PickModel(db.Model):
     game_id = db.Column(
         db.Integer, db.ForeignKey('games.game_id'), nullable=False)
     week_num = db.Column(db.Integer, nullable=False)
-    nfl_team_name = db.Column(db.String(30), nullable=False)
+    nfl_team_name = db.Column(db.String(30), db.ForeignKey('nfl_teams.nickname'), nullable=False)
 
     player_team = db.relationship('PlayerTeamModel')
+    nfl_team_info = db.relationship('nflTeamModel')
 
     def __init__(self, team_id, game_id, week_num, nfl_team_name):
         self.team_id = team_id
