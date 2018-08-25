@@ -12,10 +12,9 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 api = Api(app)
 mail = Mail(app)
-from models import *
 
 from resources import GamesList, User, UserExistence, PlayerTeam,  League, LeaguesList, LeaguesByUser,\
-    Pick, AdminMessage, AdminMessages, AdminGames, nflTeam
+    Pick, AdminMessage, AdminMessages, AdminGames, nflTeam, Stadium
 
 from app.email import send_email
 
@@ -33,6 +32,7 @@ api.add_resource(AdminMessage, '/admin/message/<string:user_id>',
 api.add_resource(AdminMessages, '/admin/messages', methods=['GET'])
 api.add_resource(AdminGames, '/admin/games', methods=['PUT'])
 api.add_resource(nflTeam, '/admin/nfl_teams', methods=['PUT'])
+api.add_resource(Stadium, '/admin/stadiums')
 
 # @app.route('/email', methods=['GET'])
 # def email_request():

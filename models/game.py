@@ -18,12 +18,14 @@ class GameModel(db.Model):
     quarter = db.Column(db.String(3))
     quarter_time = db.Column(db.String(10))
     week = db.Column(db.Integer)
+    stadium_id = db.Column(db.Integer, db.ForeignKey('stadiums.stadium_id'))
 
     home_team_info = db.relationship('nflTeamModel', foreign_keys=[home_team_name])
     away_team_info = db.relationship('nflTeamModel',foreign_keys=[away_team_name])
+    stadium_info = db.relationship('StadiumModel')
 
     def __init__(self, game_id, home_team_name, home_team_score, away_team_name,
-                 away_team_score, day_of_week, time, game_date, quarter, quarter_time, week):
+                 away_team_score, day_of_week, time, game_date, quarter, quarter_time, stadium_id, week):
         self.game_id = game_id
         self.home_team_name = home_team_name
         self.home_team_score = home_team_score
@@ -34,6 +36,7 @@ class GameModel(db.Model):
         self.game_date = game_date
         self.quarter = quarter
         self.quarter_time = quarter_time
+        self.stadium_id = stadium_id
         self.week = week
 
     def __repr__(self):
@@ -46,15 +49,16 @@ class GameModel(db.Model):
     def json(self):
         return {
             'game_id': self.game_id,
-            'home_team_info': self.home_team_info,
+            'home_team_info': self.home_team_info.json(),
             'home_team_score': self.home_team_score or 0,
-            'away_team_info': self.away_team_info,
+            'away_team_info': self.away_team_info.json(),
             'away_team_score': self.away_team_score or 0,
             'day_of_week': self.day_of_week,
             'time': self.time,
             'game_date': datetime.strftime(self.game_date, '%Y-%m-%d'),
             'quarter': self.quarter,
             'quarter_time': self.quarter_time,
+            'stadium_info': self.stadium_info.json(),
             'week': self.week
         }
 

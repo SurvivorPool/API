@@ -9,5 +9,5 @@ class nflTeam(Resource):
         return self.populate_teams()
 
     @admin_required
-    def populate_teams(cls):
+    def populate_teams(self):
         return NFLTeamController.populate_teams()

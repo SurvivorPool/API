@@ -5,3 +5,4 @@ from .playerTeam import PlayerTeam
 from .league import League, LeaguesByUser, LeaguesList
 from .pick import Pick
 from .nfl_team import nflTeam
+from .stadium import Stadium

@@ -34,11 +34,11 @@ class GameController:
         for game in games:
             schedule_info = game['gameSchedule']
             score_info = game['score'] if game['score'] else default_score_info
-            print(score_info)
             home_score_info = score_info['homeTeamScore']
             away_score_info = score_info['visitorTeamScore']
             home_team_info = schedule_info['homeTeam']
             away_team_info = schedule_info['visitorTeam']
+            site_info = schedule_info['site']
             game_model = GameModel.find_by_game_id(schedule_info['gameKey'])
 
             if game_model is None:
@@ -57,22 +57,24 @@ class GameController:
                 game_time = time.strftime("%I:%M %p", game_time_24hr)
 
                 day_of_week = calendar.day_name[game_date.weekday()]
+                site_id = site_info['siteId']
                 game_model = GameModel(game_id, home_team_name, home_team_score, away_team_name, away_team_score,
-                                       day_of_week, game_time, game_date, quarter, quarter_time, week_num)
+                                       day_of_week, game_time, game_date, quarter, quarter_time, site_id, week_num)
                 game_model.upsert()
             else:
                 game_model.home_team_score = home_score_info['pointTotal'] or 0
                 game_model.away_team_score = away_score_info['pointTotal'] or 0
-                game_model.quarter = score_info['phase']
+                game_model.quarter = score_info['phase'][0] if len(score_info['phase']) > 3 else score_info['phase']
                 game_model.quarter_time = score_info['time']
+                game_model.game_date = datetime.strptime(schedule_info['gameDate'], '%m/%d/%Y')
+                game_time_24hr = time.strptime(schedule_info['gameTimeEastern'], "%H:%M:%S")
+                game_model.game_time = time.strftime("%I:%M %p", game_time_24hr)
+                game_model.day_of_week = calendar.day_name[game_model.game_date.weekday()]
+                game_model.site_id = site_info['siteId']
+                game_model.upsert()
 
-
-
-
-
-
-
-        return rss_feed.json(), 200
+        return_games = GameModel.get_games_by_week(week_num)
+        return {'games': [game.json() for game in return_games]}
 
 
     @classmethod
