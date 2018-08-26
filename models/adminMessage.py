@@ -36,3 +36,4 @@ class AdminMessageModel(db.Model):
     @classmethod
     def find_message_by_id(cls, message_id):
         return cls.query.filter_by(message_id=message_id).first()
+

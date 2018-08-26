@@ -53,4 +53,7 @@ class Pick(Resource):
         except:
             return {'message': 'error upserting pick.'}, 500
 
-        return {'pick': pick.json()}
+        return {
+            'pick': pick.json()
+        }
+

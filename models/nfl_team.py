@@ -1,7 +1,7 @@
 from app import db
 
 
-class nflTeamModel(db.Model):
+class NFLTeamModel(db.Model):
     __tablename__ = 'nfl_teams'
 
     nfl_team_id = db.Column(db.Integer, primary_key=True)

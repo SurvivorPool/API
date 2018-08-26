@@ -1,5 +1,5 @@
 import app
-from .game import  GameModel
+from .game import GameModel
 db = app.db
 
 

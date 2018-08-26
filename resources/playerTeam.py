@@ -16,7 +16,7 @@ class PlayerTeam(Resource):
     def get(self, team_id):
         team = PlayerTeamModel.find_by_team_id(team_id)
 
-        if not team is None:
+        if team:
             return team.json(), 200
         return {'message': 'Could not find a team with that id.'}, 404
 

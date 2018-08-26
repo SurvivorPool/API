@@ -14,7 +14,7 @@ api = Api(app)
 mail = Mail(app)
 
 from resources import GamesList, User, UserExistence, PlayerTeam,  League, LeaguesList, LeaguesByUser,\
-    Pick, AdminMessage, AdminMessages, AdminGames, nflTeam, Stadium
+    Pick, AdminMessage, AdminMessages, AdminGames, NFLTeam, Stadium
 
 from app.email import send_email
 
@@ -31,7 +31,7 @@ api.add_resource(AdminMessage, '/admin/message/<string:user_id>',
                  '/admin/message')
 api.add_resource(AdminMessages, '/admin/messages', methods=['GET'])
 api.add_resource(AdminGames, '/admin/games', methods=['PUT'])
-api.add_resource(nflTeam, '/admin/nfl_teams', methods=['PUT'])
+api.add_resource(NFLTeam, '/admin/nfl_teams', methods=['PUT'])
 api.add_resource(Stadium, '/admin/stadiums')
 
 # @app.route('/email', methods=['GET'])

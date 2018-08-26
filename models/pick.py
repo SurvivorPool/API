@@ -17,7 +17,7 @@ class PickModel(db.Model):
     nfl_team_name = db.Column(db.String(30), db.ForeignKey('nfl_teams.nickname'), nullable=False)
 
     player_team = db.relationship('PlayerTeamModel')
-    nfl_team_info = db.relationship('nflTeamModel')
+    nfl_team_info = db.relationship('NFLTeamModel')
 
     def __init__(self, team_id, game_id, week_num, nfl_team_name):
         self.team_id = team_id
@@ -69,7 +69,7 @@ class PickModel(db.Model):
     def current_week_pick_required(cls, team_id):
         team = playerTeam.PlayerTeamModel.find_by_team_id(team_id)
         if not team.is_active:
-            return false
+            return False
 
         week = GameModel.get_max_week()
         pick = cls.find_pick_by_week_and_team_id(week, team_id)

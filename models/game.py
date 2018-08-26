@@ -19,8 +19,8 @@ class GameModel(db.Model):
     week = db.Column(db.Integer)
     stadium_id = db.Column(db.Integer, db.ForeignKey('stadiums.stadium_id'))
 
-    home_team_info = db.relationship('nflTeamModel', foreign_keys=[home_team_name])
-    away_team_info = db.relationship('nflTeamModel',foreign_keys=[away_team_name])
+    home_team_info = db.relationship('NFLTeamModel', foreign_keys=[home_team_name])
+    away_team_info = db.relationship('NFLTeamModel', foreign_keys=[away_team_name])
     stadium_info = db.relationship('StadiumModel')
 
     def __init__(self, game_id, home_team_name, home_team_score, away_team_name,

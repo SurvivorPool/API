@@ -1,7 +1,6 @@
-from flask_restplus import Resource, reqparse, fields
+from flask_restplus import Resource, reqparse
 from models.adminMessage import AdminMessageModel
 import authentication
-
 
 
 class AdminMessage(Resource):
