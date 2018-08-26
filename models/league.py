@@ -27,6 +27,7 @@ class LeagueModel(db.Model):
         return {
             'league_id': self.league_id,
             'league_name': self.league_name,
+            'league_type': self.league_type.league_type_name,
             'league_description': self.league_description,
             'price': "{:,.2f}".format(price),
             'current_week': GameModel.get_max_week(),
@@ -41,6 +42,7 @@ class LeagueModel(db.Model):
             'league_id': self.league_id,
             'league_name': self.league_name,
             'league_description': self.league_description,
+            'league_type': self.league_type.league_type_name,
             'price': "{:,.2f}".format(price),
             'pot': price * len(self.teams),
             'is_active': len([team for team in self.teams if team.is_active])

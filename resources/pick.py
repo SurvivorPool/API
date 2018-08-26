@@ -20,21 +20,20 @@ class Pick(Resource):
     parser.add_argument(
         'game_id', type=int, required=True, help='game_id cannot be null')
 
-    #@authentication.player_team_ownership_required_json_param
+    @authentication.player_team_ownership_required_json_param
     def put(self):
         data = self.parser.parse_args()
 
         team = PlayerTeamModel.find_by_team_id(data['team_id'])
 
         if team:
-            league_type_id = team.league.league_type.league_type_id
-            print(league_type_id)
-            if league_type_id == LeagueTypes.STANDARD.value:
+            league_type_name = team.league.league_type.league_type_name
+            if league_type_name == LeagueTypes.STANDARD.name:
                 return StandardLeaguePickController.validate_pick(data)
             else:
                 raise NotImplementedError
 
-        return {'error': 'error'}
+        return {'message': 'League type not implemented yet.'}
 
 
 
