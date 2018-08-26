@@ -1,5 +1,6 @@
 import app
 from .game import GameModel
+from.league_type import LeagueTypes
 db = app.db
 
 
@@ -10,7 +11,11 @@ class LeagueModel(db.Model):
     league_name = db.Column(db.String(50), nullable=False)
     league_description = db.Column(db.String(500), nullable=False)
     price = db.Column(db.Integer, nullable=False)
+    league_type_id = db.Column(db.Integer, db.ForeignKey('league_types.league_type_id'),
+                               default=LeagueTypes.STANDARD.value, server_default=str(LeagueTypes.STANDARD.value))
+
     teams = db.relationship("PlayerTeamModel")
+    league_type = db.relationship("LeagueTypeModel")
 
     def __init__(self, league_name, league_description, price):
         self.league_name = league_name

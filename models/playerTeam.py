@@ -16,7 +16,7 @@ class PlayerTeamModel(db.Model):
 
     user = db.relationship('UserModel')
     league = db.relationship('LeagueModel')
-    team_picks = db.relationship('PickModel', lazy='joined')
+    team_picks = db.relationship('PickModel')
 
     current_week = GameModel.get_max_week()
 
