@@ -34,7 +34,9 @@ class PlayerTeamModel(db.Model):
             'league_info': self.league.json_league_info(),
             'team_name': self.team_name,
             'is_active': self.is_active,
-            'has_paid': self.has_paid
+            'has_paid': self.has_paid,
+            'current_pick': [pick.nfl_team_name for pick in self.team_picks if pick.week_num == self.current_week],
+            'pick_history': [pick.json_basic() for pick in self.team_picks]
         }
 
     def json_basic(self):
@@ -72,11 +74,6 @@ class PlayerTeamModel(db.Model):
     @classmethod
     def find_by_team_id(cls, team_id):
         return cls.query.filter_by(team_id=team_id).first()
-
-    @classmethod
-    def check_unique_team_name_for_league(cls, team_name, league_id):
-        team = cls.query.filter_by(team_name=team_name, league_id=league_id).first()
-        return team is None
 
     @classmethod
     def get_unique_leagues_for_user(cls, user_id):
