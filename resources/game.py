@@ -1,5 +1,4 @@
-from flask_restplus import Resource, fields
-import app
+from flask_restplus import Resource
 from controllers import GameController
 import authentication
 
