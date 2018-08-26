@@ -8,6 +8,6 @@ class NFLTeam(Resource):
     def put(self):
         return self.populate_teams()
 
-    #@admin_required
+    @admin_required
     def populate_teams(self):
         return NFLTeamController.populate_teams()
