@@ -12,6 +12,7 @@ class PlayerTeamModel(db.Model):
     team_name = db.Column(db.String(100), nullable=False)
     is_active = db.Column(db.Boolean, default=True)
     has_paid = db.Column(db.Boolean, default=False)
+    streak = db.Column(db.Integer, server_default='0', default=0, nullable=False)
 
     user = db.relationship('UserModel')
     league = db.relationship('LeagueModel')
@@ -25,6 +26,7 @@ class PlayerTeamModel(db.Model):
         self.team_name = team_name
         self.is_active = True
         self.has_paid = False
+        self.streak = 0
 
     def json(self):
         return {
@@ -38,7 +40,8 @@ class PlayerTeamModel(db.Model):
                 pick.nfl_team_name for pick in self.team_picks
                 if pick.week_num == self.current_week
             ],
-            'pick_history': [pick.json_basic() for pick in self.team_picks]
+            'pick_history': [pick.json_basic() for pick in self.team_picks],
+            'streak': self.streak
         }
 
     def json_basic(self):
@@ -47,7 +50,8 @@ class PlayerTeamModel(db.Model):
             'user_info': self.user.user_json(),
             'team_name': self.team_name,
             'is_active': self.is_active,
-            'has_paid': self.has_paid
+            'has_paid': self.has_paid,
+            'streak': self.streak
         }
 
     def json_for_user(self):
@@ -60,7 +64,8 @@ class PlayerTeamModel(db.Model):
             'current_pick': [
                 pick.nfl_team_name for pick in self.team_picks
                 if pick.week_num == self.current_week],
-            'pick_history': [pick.json_basic() for pick in self.team_picks]
+            'pick_history': [pick.json_basic() for pick in self.team_picks],
+            'streak': self.streak
         }
 
     def upsert(self):
