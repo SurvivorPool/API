@@ -43,13 +43,20 @@ class AdminMessage(Resource):
 
         try:
             message.upsert()
-            return {'message': message.json()}, 200
+            return {
+                       'message': message.json()
+                   }, 200
         except:
-            return {'message': 'Unable to save message'}, 500
+            return {
+                       'message': 'Unable to save message'
+                   }, 500
 
 
 class AdminMessages(Resource):
     @authentication.login_required
     def get(self):
         messages = AdminMessageModel.find_all_active_messages()
-        return {'messages': [message.json() for message in messages]}
+        return {
+            'messages': [message.json() for message in messages]
+        }
+

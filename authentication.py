@@ -1,14 +1,13 @@
 from functools import wraps
 from flask import request
-from flask_restplus import reqparse
 import firebase_admin
-from firebase_admin import auth, credentials
+from firebase_admin import auth
 from dotenv import load_dotenv
-load_dotenv(verbose=True)
+
 import os
 from models.user import UserModel
 from models.playerTeam import PlayerTeamModel
-
+load_dotenv(verbose=True)
 cert = firebase_admin.credentials.Certificate({
     "type":
     "service_account",

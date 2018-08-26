@@ -23,8 +23,8 @@ class StadiumController:
                 new_stadium_id = stadium_info['siteId']
                 new_stadium_city = stadium_info['siteCity']
                 new_stadium_name = stadium_info['siteFullname']
-                new_stadium_state= stadium_info['siteState']
-                new_stadium_roof_type  = stadium_info['roofType']
+                new_stadium_state = stadium_info['siteState']
+                new_stadium_roof_type = stadium_info['roofType']
                 new_stadium = StadiumModel(new_stadium_id, new_stadium_city, new_stadium_name, new_stadium_state,
                                            new_stadium_roof_type)
                 new_stadium.upsert()

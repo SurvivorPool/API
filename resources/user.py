@@ -1,8 +1,6 @@
 from flask_restplus import Resource, reqparse, fields
 import app
 from models.user import UserModel
-from models.league import LeagueModel
-from models.playerTeam import PlayerTeamModel
 import authentication
 
 api = app.api
@@ -28,6 +26,7 @@ class User(Resource):
     @authentication.user_and_session_match
     def get(self, user_id):
         user = UserModel.find_by_user_id(user_id)
+
         if user:
             return user.json()
 
@@ -38,7 +37,6 @@ class User(Resource):
         data = self.parser.parse_args()
         user = UserModel(data['user_id'], data['full_name'], data['email'],
                          data['picture_url'])
-
         try:
             user.upsert()
         except:

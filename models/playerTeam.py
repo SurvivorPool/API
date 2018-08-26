@@ -7,8 +7,7 @@ class PlayerTeamModel(db.Model):
     __tablename__ = 'player_teams'
 
     team_id = db.Column(db.Integer, primary_key=True, nullable=False)
-    league_id = db.Column(
-        db.Integer, db.ForeignKey('leagues.league_id'), nullable=False)
+    league_id = db.Column(db.Integer, db.ForeignKey('leagues.league_id'), nullable=False)
     user_id = db.Column(db.String(45), db.ForeignKey('users.user_id'))
     team_name = db.Column(db.String(100), nullable=False)
     is_active = db.Column(db.Boolean, default=True)
@@ -35,7 +34,10 @@ class PlayerTeamModel(db.Model):
             'team_name': self.team_name,
             'is_active': self.is_active,
             'has_paid': self.has_paid,
-            'current_pick': [pick.nfl_team_name for pick in self.team_picks if pick.week_num == self.current_week],
+            'current_pick': [
+                pick.nfl_team_name for pick in self.team_picks
+                if pick.week_num == self.current_week
+            ],
             'pick_history': [pick.json_basic() for pick in self.team_picks]
         }
 
@@ -55,7 +57,9 @@ class PlayerTeamModel(db.Model):
             'team_name': self.team_name,
             'is_active': self.is_active,
             'has_paid': self.has_paid,
-            'current_pick': [pick.nfl_team_name for pick in self.team_picks if pick.week_num == self.current_week],
+            'current_pick': [
+                pick.nfl_team_name for pick in self.team_picks
+                if pick.week_num == self.current_week],
             'pick_history': [pick.json_basic() for pick in self.team_picks]
         }
 
