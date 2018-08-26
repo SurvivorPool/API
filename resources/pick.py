@@ -20,12 +20,12 @@ class Pick(Resource):
     parser.add_argument(
         'game_id', type=int, required=True, help='game_id cannot be null')
 
-    @authentication.login_required
+    #@authentication.login_required
     @authentication.player_team_ownership_required_json_param
     def put(self):
         data = self.parser.parse_args()
         week = GameModel.get_max_week()
-        GameController.update_games(week)
+        GameController.update_games()
 
         game = GameModel.find_by_game_id(data['game_id'])
 
