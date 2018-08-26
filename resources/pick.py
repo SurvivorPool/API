@@ -20,7 +20,6 @@ class Pick(Resource):
     parser.add_argument(
         'game_id', type=int, required=True, help='game_id cannot be null')
 
-    #@authentication.login_required
     @authentication.player_team_ownership_required_json_param
     def put(self):
         data = self.parser.parse_args()
@@ -33,6 +32,12 @@ class Pick(Resource):
             return {
                 'message':
                 'This game has already started. Please try a different game.'
+            }, 403
+
+        if data['nfl_team_name'] not in [game.home_team_name, game.away_team_name]:
+            return {
+                'message':
+                'Team for selected pick is not a part of game with id {}.'.format(data['game_id'])
             }, 403
 
         if (PickModel.is_duplicate_team_pick(data['team_id'],
