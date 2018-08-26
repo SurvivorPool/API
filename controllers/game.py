@@ -3,7 +3,6 @@ from datetime import datetime
 import time
 import calendar
 import requests
-import json
 import xml.etree.ElementTree as ET
 import urllib.request
 
@@ -17,10 +16,14 @@ class GameController:
         current_week = GameModel.get_max_week() or 0
         current_games = GameModel.get_games_by_week(current_week)
 
-        # for game in current_games:
-        #     if game.quarter != 'F' and game.quarter != 'FO':
-        #         return {'message': 'not all games completed yet.'}, 401
+        for game in current_games:
+            if game.quarter != 'F' and game.quarter != 'FO':
+                return {'message': 'not all games completed yet.'}, 401
 
+        return cls.update_games()
+
+    @classmethod
+    def update_games(cls):
         rss_feed = requests.get(cls.nfl_endpoint)
 
         json_data = rss_feed.json()
@@ -28,8 +31,11 @@ class GameController:
         week_num = json_data['week']
         games = json_data['gameScores']
 
-        default_score_info = {'homeTeamScore': {'pointTotal': 0}, 'visitorTeamScore': {'pointTotal': 0},
-                              'phase': 'PREGAME', 'time': '15:00'}
+        default_score_info = {
+            'homeTeamScore': {'pointTotal': 0},
+            'visitorTeamScore': {'pointTotal': 0},
+            'phase': 'PREGAME', 'time': '15:00'
+        }
 
         for game in games:
             schedule_info = game['gameSchedule']
@@ -48,27 +54,34 @@ class GameController:
                 away_team_name = away_team_info['nick']
                 away_team_score = away_score_info['pointTotal'] or 0
 
-                quarter = score_info['phase'][0] if len(score_info['phase']) > 3  else score_info['phase']
+                quarter = score_info['phase'][0] if len(score_info['phase']) > 3 else score_info['phase']
 
                 quarter_time = score_info['time']
 
-                game_date = datetime.strptime(schedule_info['gameDate'], '%m/%d/%Y')
                 game_time_24hr = time.strptime(schedule_info['gameTimeEastern'], "%H:%M:%S")
                 game_time = time.strftime("%I:%M %p", game_time_24hr)
+                game_time = time.strptime(game_time, "%I:%M %p")
+
+                game_date = datetime.strptime(schedule_info['gameDate'] + ' ' + time.strftime('%I:%M %p', game_time),
+                                              '%m/%d/%Y %I:%M %p')
 
                 day_of_week = calendar.day_name[game_date.weekday()]
                 site_id = site_info['siteId']
                 game_model = GameModel(game_id, home_team_name, home_team_score, away_team_name, away_team_score,
-                                       day_of_week, game_time, game_date, quarter, quarter_time, site_id, week_num)
+                                       day_of_week, game_date, quarter, quarter_time, site_id, week_num)
                 game_model.upsert()
             else:
                 game_model.home_team_score = home_score_info['pointTotal'] or 0
                 game_model.away_team_score = away_score_info['pointTotal'] or 0
                 game_model.quarter = score_info['phase'][0] if len(score_info['phase']) > 3 else score_info['phase']
                 game_model.quarter_time = score_info['time']
-                game_model.game_date = datetime.strptime(schedule_info['gameDate'], '%m/%d/%Y')
                 game_time_24hr = time.strptime(schedule_info['gameTimeEastern'], "%H:%M:%S")
-                game_model.game_time = time.strftime("%I:%M %p", game_time_24hr)
+                game_time = time.strftime("%I:%M %p", game_time_24hr)
+                game_time = time.strptime(game_time, "%I:%M %p")
+
+                game_model.game_date = datetime.strptime(schedule_info['gameDate'] + ' '
+                                                         + time.strftime('%I:%M %p', game_time),
+                                                         '%m/%d/%Y %I:%M %p')
                 game_model.day_of_week = calendar.day_name[game_model.game_date.weekday()]
                 game_model.site_id = site_info['siteId']
                 game_model.upsert()
@@ -90,7 +103,7 @@ class GameController:
         return cls.get_and_update_games(weekNum)
 
     @classmethod
-    def update_games(cls, weekNum):
+    def update_games_old(cls, weekNum):
         max_week = GameModel.get_max_week() or 0
         if int(weekNum) > max_week:
             return {'message': 'week not populated yet.'}

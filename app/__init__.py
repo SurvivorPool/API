@@ -18,7 +18,7 @@ from resources import GamesList, User, UserExistence, PlayerTeam,  League, Leagu
 
 from app.email import send_email
 
-api.add_resource(GamesList, '/games/<string:weekNum>')
+api.add_resource(GamesList, '/games/')
 api.add_resource(User, '/user', '/user/<string:user_id>')
 api.add_resource(UserExistence, '/user/exists/<string:user_id>')
 api.add_resource(PlayerTeam, '/player_team',
