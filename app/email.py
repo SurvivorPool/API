@@ -10,7 +10,7 @@ def send_email(subject, sender, recipients):
     all_users = UserModel.get_all_users()
 
     for user in all_users:
-        msg.body = render_template('league_lost.txt', user=user)
+        #msg.body = render_template('league_lost.txt', user=user)
         msg.html = render_template('league_lost.html', user=user)
         mail.send(msg)
     return

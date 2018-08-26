@@ -1,18 +1,11 @@
-<html>
-
-<head>
-    {% if title %}
-    <title>{{ title }}</title>
-    {% else %}
-    <title>Survivor Pool</title>
-    {% endif %}
-</head>
-
-<body>
-    <div>Microblog:
-        <a href="/index">Home</a>
+{% extends 'bootstrap/base.html' %}
+{% block title %}Survivor Pool{% endblock %}
+{% block logo %} {% endblock %}
+{% block content %}
+    <div class="container">
+        <img src="{{ url_for('static', filename='logo.png') }}" />
+        {# application content needs to be provided in the app_content block #}
+        {% block app_content %}{% endblock %}
     </div>
-    <hr> {% block content %}{% endblock %}
-</body>
+{% endblock %}
 
-</html>

@@ -3,4 +3,4 @@ from .game import GameModel
 # from .league import LeagueModel
 # from .pick import PickModel
 # from .playerTeam import PlayerTeamModel
-# from .user import UserModel
+from .user import UserModel

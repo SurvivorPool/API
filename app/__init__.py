@@ -1,8 +1,9 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_restplus import Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_mail import Mail
+from flask_bootstrap import Bootstrap
 
 from config import Config
 
@@ -12,6 +13,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 api = Api(app)
 mail = Mail(app)
+bootstrap = Bootstrap(app)
 
 from resources import GamesList, User, UserExistence, PlayerTeam,  League, LeaguesList, LeaguesByUser,\
     Pick, AdminMessage, AdminMessages, AdminGames, NFLTeam, Stadium
@@ -34,9 +36,11 @@ api.add_resource(AdminGames, '/admin/games', methods=['PUT'])
 api.add_resource(NFLTeam, '/admin/nfl_teams', methods=['PUT'])
 api.add_resource(Stadium, '/admin/stadiums')
 
-# @app.route('/email', methods=['GET'])
-# def email_request():
-#     send_email('test', app.config['MAIL_USERNAME'], ['alexmberardi@gmail.com'])
-#
-#     return
+from models.user import UserModel
+
+@app.route('/email', methods=['GET'])
+def email_request():
+    send_email('test', app.config['MAIL_USERNAME'], ['alexmberardi@gmail.com'])
+    return render_template('league_lost.html', user=UserModel('user_id', 'alex berardi', 'alexmberardi@gmail.com', 'google.com'))
+
 
