@@ -2,7 +2,8 @@ from models.pick import PickModel
 from models.game import GameModel
 from models.playerTeam import PlayerTeamModel
 from controllers.game import GameController
-
+from config import Config
+from app.email import send_email
 from models.league_type import LeagueTypes
 
 from .game import GameController
@@ -32,6 +33,10 @@ class StandardLeagueAdvanceController:
                 active_team.streak += 1
                 advancing_teams.append(active_team)
             #active_team.upsert()
+
+        for team in deactivated_teams:
+            if team.user.receive_notifications:
+                send_email("Sorry, you've been eliminated", Config.MAIL_USERNAME, team.user, team)
 
         return {
             'deactivated_teams': [deactivated_team.json() for deactivated_team in deactivated_teams],

@@ -4,12 +4,9 @@ from app import mail
 from models.user import UserModel
 
 
-def send_email(subject, sender, recipients):
-    msg = Message(subject, sender=sender, recipients=recipients)
+def send_email(subject, sender, user, team):
+    msg = Message(subject, sender=sender, recipients=[user.email])
+    msg.html = render_template('league_lost.html', user=user, team=team)
+    mail.send(msg)
 
-    all_users = UserModel.get_all_users()
-
-    for user in all_users:
-        msg.html = render_template('league_lost.html', user=user)
-        mail.send(msg)
     return
