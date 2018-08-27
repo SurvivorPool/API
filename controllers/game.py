@@ -9,6 +9,22 @@ class GameController:
     nfl_endpoint = 'https://feeds.nfl.com/feeds-rs/scores.json'
 
     @classmethod
+    def get_losers_for_week(cls, week_num):
+        games = GameModel.get_games_by_week(week_num)
+
+        losers = []
+        for game in games:
+            if game.home_team_score == game.away_team_score:
+                losers.append(game.home_team_name)
+                losers.append(game.away_team_name)
+            elif game.home_team_score < game.away_team_score:
+                losers.append(game.home_team_name)
+            else:
+                losers.append(game.away_team_name)
+
+        return losers
+
+    @classmethod
     def populate_games(cls):
         current_week = GameModel.get_max_week() or 0
         current_games = GameModel.get_games_by_week(current_week)

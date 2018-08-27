@@ -17,6 +17,7 @@ class LeagueTypeModel(db.Model):
         db.session.add(self)
         db.session.commit()
 
+
 class LeagueTypes(Enum):
     STANDARD = 1
 

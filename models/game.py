@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy.sql.expression import func
+from sqlalchemy.sql.expression import func, and_
 import app
 db = app.db
 
@@ -77,3 +77,9 @@ class GameModel(db.Model):
         return {
             'games': [game.json() for game in cls.query.filter_by(week=week)]
         }
+
+    @classmethod
+    def week_has_unfinished_games(cls, week_num):
+        games = cls.query.filter(and_(cls.week == week_num, ~cls.quarter.in_(['F', 'FO']))).all()
+        return len(games) > 0
+
