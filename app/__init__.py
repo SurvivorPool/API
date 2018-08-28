@@ -16,7 +16,7 @@ mail = Mail(app)
 bootstrap = Bootstrap(app)
 
 from resources import GamesList, User, UserExistence, PlayerTeam,  League, LeaguesList, LeaguesByUser,\
-    Pick, AdminMessage, AdminMessages, AdminGames, NFLTeam, Stadium, AdvanceWeek, AdminTeam
+    Pick, AdminMessage, AdminMessages, AdminGames, NFLTeam, Stadium, AdvanceWeek, AdminTeam, UserMessage
 
 from app.email import send_email
 
@@ -37,6 +37,7 @@ api.add_resource(NFLTeam, '/admin/nfl_teams', methods=['PUT'])
 api.add_resource(Stadium, '/admin/stadiums')
 api.add_resource(AdvanceWeek, '/admin/advance_week',  methods=['PUT'])
 api.add_resource(AdminTeam, '/admin/player_team', methods=['PUT', 'DELETE'])
+api.add_resource(UserMessage, '/user/<string:user_id>/messages')
 
 from models.user import UserModel
 
