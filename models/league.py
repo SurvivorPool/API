@@ -33,7 +33,7 @@ class LeagueModel(db.Model):
             'current_week': GameModel.get_max_week(),
             'teams': [team.json_basic() for team in self.teams],
             'pot': price * len(self.teams),
-            'is_active': len([team for team in self.teams if team.is_active])
+            'is_active': len([team for team in self.teams if team.is_active]) > 1
         }
 
     def json_league_info(self):
@@ -45,7 +45,7 @@ class LeagueModel(db.Model):
             'league_type': self.league_type.league_type_name,
             'price': "{:,.2f}".format(price),
             'pot': price * len(self.teams),
-            'is_active': len([team for team in self.teams if team.is_active])
+            'is_active': len([team for team in self.teams if team.is_active]) > 1
         }
 
     def upsert(self):

@@ -39,7 +39,18 @@ class UserModel(db.Model):
             'email': self.email,
             'is_admin': self.is_admin,
             'picture_url': self.picture_url,
+            'receive_notifications': self.receive_notifications,
             'teams': [team.json_for_user() for team in self.teams]
+        }
+
+    def json_user_owner_basic(self):
+        return {
+            'user_id': self.user_id,
+            'full_name': self.full_name,
+            'email': self.email,
+            'is_admin': self.is_admin,
+            'picture_url': self.picture_url,
+            'receive_notifications': self.receive_notifications
         }
 
     def user_json(self):

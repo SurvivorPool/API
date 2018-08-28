@@ -11,16 +11,9 @@ user_swagger = api.model('User', {
 
 class User(Resource):
     parser = reqparse.RequestParser()
+
     parser.add_argument(
         'user_id', type=str, required=True, help='user_id cannot be null')
-
-    parser.add_argument(
-        'full_name', type=str, required=True, help='full_name cannot be null')
-
-    parser.add_argument(
-        'email', type=str, required=True, help='email cannot be null')
-
-    parser.add_argument('picture_url', type=str)
 
     @api.expect(user_swagger)
     @authentication.user_and_session_match
@@ -32,8 +25,37 @@ class User(Resource):
 
         return {'message': 'cannot find user'}, 401
 
+    #@authentication.user_and_session_match
+    def put(self):
+        self.parser.add_argument('receive_notifications')
+        data = self.parser.parse_args()
+        user = UserModel.find_by_user_id(data['user_id'])
+
+        if user is None:
+            return {'message': 'User not found.'}, 401
+
+        if not data['receive_notifications'] is None:
+            user.receive_notifications = data['receive_notifications'] == 'true'
+
+        try:
+            user.upsert()
+        except:
+            return {'message': 'An error occured updating the user'}, 500
+
+        return user.json_user_owner_basic()
+
+
     @api.expect(parser)
     def post(self):
+
+        self.parser.add_argument(
+            'full_name', type=str, required=True, help='full_name cannot be null')
+
+        self.parser.add_argument(
+            'email', type=str, required=True, help='email cannot be null')
+
+        self.parser.add_argument('picture_url', type=str)
+
         data = self.parser.parse_args()
         user = UserModel(data['user_id'], data['full_name'], data['email'],
                          data['picture_url'])
