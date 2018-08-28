@@ -16,7 +16,7 @@ class User(Resource):
         'user_id', type=str, required=True, help='user_id cannot be null')
 
     @api.expect(user_swagger)
-    #@authentication.user_and_session_match_url_param
+    @authentication.user_and_session_match_url_param
     def get(self, user_id):
         user = UserModel.find_by_user_id(user_id)
 
@@ -25,7 +25,7 @@ class User(Resource):
 
         return {'message': 'cannot find user'}, 401
 
-    #@authentication.user_and_session_match_json_param
+    @authentication.user_and_session_match_json_param
     def put(self):
         self.parser.add_argument('receive_notifications', type=bool)
         data = self.parser.parse_args()

@@ -75,7 +75,7 @@ def user_and_session_match_json_param(f):
         request_data = request.get_json()
         user = UserModel.find_by_user_id(request_data['user_id'])
 
-        if user is None or user.user_id != (kwargs['user_id']):
+        if user is None or user.user_id != request_user_info['user_id']:
             return {'message': 'You are not the owner of this account.'}, 403
 
         return f(*args, **kwargs)
