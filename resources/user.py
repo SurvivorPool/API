@@ -16,7 +16,7 @@ class User(Resource):
         'user_id', type=str, required=True, help='user_id cannot be null')
 
     @api.expect(user_swagger)
-    @authentication.user_and_session_match
+    #@authentication.user_and_session_match_url_param
     def get(self, user_id):
         user = UserModel.find_by_user_id(user_id)
 
@@ -25,7 +25,7 @@ class User(Resource):
 
         return {'message': 'cannot find user'}, 401
 
-    @authentication.user_and_session_match
+    #@authentication.user_and_session_match_json_param
     def put(self):
         self.parser.add_argument('receive_notifications')
         data = self.parser.parse_args()
@@ -35,11 +35,13 @@ class User(Resource):
             return {'message': 'User not found.'}, 401
 
         if not data['receive_notifications'] is None:
-            user.receive_notifications = data['receive_notifications'] == 'true'
+            user.receive_notifications = data['receive_notifications'].lower() == 'true'
 
         try:
             user.upsert()
-        except:
+
+        except Exception as a:
+            print(a)
             return {'message': 'An error occured updating the user'}, 500
 
         return user.json_user_owner_basic()
