@@ -12,8 +12,10 @@ class UserMessageModel(db.Model):
     create_date = db.Column(db.DateTime)
     read = db.Column(db.Boolean, default=False, server_default="False", nullable=False)
     read_date = db.Column(db.DateTime)
+    user_id = db.Column(db.String(45), db.ForeignKey('users.user_id'))
 
     message_type = db.relationship("UserMessageTypeModel")
+    user = db.relationship('UserModel')
 
     def __init__(self, message_text, message_type_id, create_date, read, read_date):
         self.message_text = message_text
