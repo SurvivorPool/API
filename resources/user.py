@@ -27,7 +27,7 @@ class User(Resource):
 
     #@authentication.user_and_session_match_json_param
     def put(self):
-        self.parser.add_argument('receive_notifications')
+        self.parser.add_argument('receive_notifications', type=bool)
         data = self.parser.parse_args()
         user = UserModel.find_by_user_id(data['user_id'])
 
@@ -35,7 +35,7 @@ class User(Resource):
             return {'message': 'User not found.'}, 401
 
         if not data['receive_notifications'] is None:
-            user.receive_notifications = data['receive_notifications'].lower() == 'true'
+            user.receive_notifications = data['receive_notifications']
 
         try:
             user.upsert()
