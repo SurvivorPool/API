@@ -37,7 +37,7 @@ class League(Resource):
 
     @api.expect(parser)
     @admin_required
-    def put(self, league_id):
+    def put(self):
         data = self.parser.parse_args()
         league = LeagueModel.find_league_by_id(data['league_id'])
 
