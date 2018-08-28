@@ -25,7 +25,7 @@ class User(Resource):
 
         return {'message': 'cannot find user'}, 401
 
-    #@authentication.user_and_session_match
+    @authentication.user_and_session_match
     def put(self):
         self.parser.add_argument('receive_notifications')
         data = self.parser.parse_args()

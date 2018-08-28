@@ -1,6 +1,7 @@
 from flask_restplus import Resource
 from controllers import GameController
 import authentication
+import asyncio
 
 
 class GamesList(Resource):

@@ -25,7 +25,7 @@ class League(Resource):
         required=True,
         help='league_description cannot be null')
     parser.add_argument(
-        'price', type=int, required=True, help='price cannot be null')
+        'price', type=float, required=True, help='price cannot be null')
 
     @api.expect(league_swagger)
     @login_required
@@ -37,17 +37,17 @@ class League(Resource):
 
     @api.expect(parser)
     @admin_required
-    def put(self):
+    def put(self, league_id):
         data = self.parser.parse_args()
         league = LeagueModel.find_league_by_id(data['league_id'])
 
         if league is None:
             league = LeagueModel(data['league_name'],
-                                 data['league_description'], data['price'])
+                                 data['league_description'], data['price'] * 100)
         else:
             league.league_name = data['league_name']
             league.league_description = data['league_description']
-            league.price = int(data['price']) * 100
+            league.price = data['price'] * 100
 
         try:
             league.upsert()
