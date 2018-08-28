@@ -128,7 +128,6 @@ def admin_required(f):
     def decorated_func(*args, **kwargs):
 
         try:
-            print(request.headers['auth'])
             request_user_info = auth.verify_id_token(request.headers['auth'])
         except:
             return {'message': 'User not an administrator.'}, 500
