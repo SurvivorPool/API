@@ -18,6 +18,7 @@ class PickModel(db.Model):
 
     player_team = db.relationship('PlayerTeamModel')
     nfl_team_info = db.relationship('NFLTeamModel')
+    game = db.relationship('GameModel')
 
     def __init__(self, team_id, game_id, week_num, nfl_team_name):
         self.team_id = team_id

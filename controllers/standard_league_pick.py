@@ -35,6 +35,9 @@ class StandardLeaguePickController:
             pick = PickModel(data['team_id'], data['game_id'], week,
                              data['nfl_team_name'])
         else:
+            if not pick.game.quarter.upper() == 'P':
+                return {'message': 'Current pick game already started. Cannot choose new team.'}, 401
+
             pick.game_id = data['game_id']
             pick.nfl_team_name = data['nfl_team_name']
 
