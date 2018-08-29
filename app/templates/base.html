@@ -2,8 +2,9 @@
 {% block title %}Survivor Pool{% endblock %}
 {% block logo %} {% endblock %}
 {% block content %}
-    <div class="container">
-        <img src="{{ url_for('static', filename='logo.png', _external=True) }}" />
+    <div class="container text-center">
+        <img src="http://api.survivorpool.win/static/logo.png"/>
+        <!--<img src="{{ url_for('static', filename='logo.png', _external=True) }}" />-->
         {# application content needs to be provided in the app_content block #}
         {% block app_content %}{% endblock %}
     </div>

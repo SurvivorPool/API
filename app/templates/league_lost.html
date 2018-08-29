@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block app_content %}
-<h1>
-    Sorry {{user.full_name}}, your team {{team.team_name}} has been eliminated from {{team.league.league_name}}.
-</h1>
+    <div>
+        <h1>
+            <div>
+                Sorry {{user.full_name}}, your team "{{team.team_name}}" has been sunk from {{team.league.league_name}}.
+                <h4 style="color:green">But, it's okay, dust yourself off and try again in another league!</h4>
+            </div>
+        </h1>
+    </div>
 {% endblock %}
