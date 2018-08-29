@@ -26,17 +26,21 @@ class StandardLeagueAdvanceController:
         advancing_teams = []
         for active_team in active_teams:
             pick = PickModel.find_pick_by_week_and_team_id(week_num, active_team.team_id)
-            if pick.nfl_team_name in losing_nfl_teams:
-                active_team.is_active = False
+
+            if pick is None:
                 deactivated_teams.append(active_team)
             else:
-                active_team.streak += 1
-                advancing_teams.append(active_team)
-            #active_team.upsert()
+                if pick.nfl_team_name in losing_nfl_teams:
+                    active_team.is_active = False
+                    deactivated_teams.append(active_team)
+                else:
+                    active_team.streak += 1
+                    advancing_teams.append(active_team)
+                #active_team.upsert()
 
-        for team in deactivated_teams:
-            if team.user.receive_notifications:
-                send_email("Sorry, you've been eliminated", Config.MAIL_USERNAME, team.user, team)
+        # for team in deactivated_teams:
+        #     if team.user.receive_notifications:
+        #         send_email("Sorry, you've been eliminated", Config.MAIL_USERNAME, team.user, team)
 
         return {
             'deactivated_teams': [deactivated_team.json() for deactivated_team in deactivated_teams],
