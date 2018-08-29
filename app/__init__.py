@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
-
 from config import Config
 
 app = Flask(__name__)
@@ -16,7 +15,8 @@ mail = Mail(app)
 bootstrap = Bootstrap(app)
 
 from resources import GamesList, User, UserExistence, PlayerTeam,  League, LeaguesList, LeaguesByUser,\
-    Pick, AdminMessage, AdminMessages, AdminGames, NFLTeam, Stadium, AdvanceWeek, AdminTeam, UserMessage
+    Pick, AdminMessage, AdminMessages, AdminGames, NFLTeam, Stadium, AdvanceWeek, AdminTeam, UserMessage, \
+    AdminUserMessage
 
 from app.email import send_email
 
@@ -38,6 +38,7 @@ api.add_resource(Stadium, '/admin/stadiums')
 api.add_resource(AdvanceWeek, '/admin/advance_week',  methods=['PUT'])
 api.add_resource(AdminTeam, '/admin/player_team', methods=['PUT', 'DELETE'])
 api.add_resource(UserMessage, '/user/<string:user_id>/messages')
+api.add_resource(AdminUserMessage, '/admin/user/message')
 
 from models.user import UserModel
 

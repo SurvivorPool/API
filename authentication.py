@@ -55,7 +55,7 @@ def user_and_session_match_url_param(f):
             return {'message': 'Unable to authenticate'}, 403
 
         user = UserModel.find_by_user_id(request_user_info['user_id'])
-        print(user.json())
+        print(user)
         if user is None or user.user_id != (kwargs['user_id']):
             return {'message': 'You are not the owner of this account.'}, 403
 
