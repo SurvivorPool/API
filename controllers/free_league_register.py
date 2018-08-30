@@ -6,7 +6,7 @@ class FreeLeagueRegisterController(BaseLeagueRegisterController):
     @classmethod
     def register(cls, league, team, user):
 
-        if cls.validate(league, user):
+        if not cls.validate(league, user):
             return {'message': 'Cannot join league. Free leagues are 1 team per user.'}, 401
 
         if not super().validate(league):
@@ -15,7 +15,13 @@ class FreeLeagueRegisterController(BaseLeagueRegisterController):
         return super().register(team)
 
     @classmethod
+    def full_validate(cls, league, team):
+        return super().validate(league) and cls.validate(league, team)
+
+    @classmethod
     def validate(cls, league, user):
-        return len([player_team for player_team in user.teams if player_team.league_id == league.league_id]) > 0
+        for t in user.teams:
+            print(t.league_id == league.league_id)
+        return len([player_team for player_team in user.teams if player_team.league_id == league.league_id]) == 0
 
 

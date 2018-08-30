@@ -14,7 +14,7 @@ api = Api(app)
 mail = Mail(app)
 bootstrap = Bootstrap(app)
 
-from resources import GamesList, User, UserExistence, PlayerTeam,  League, LeaguesList, LeaguesByUser,\
+from resources import GamesList, User, UserExistence, PlayerTeam, PlayerTeamRegistrationStatus,  League, LeaguesList, LeaguesByUser,\
     Pick, AdminMessage, AdminMessages, AdminGames, NFLTeam, Stadium, AdvanceWeek, AdminTeam, UserMessage, \
     AdminUserMessage
 
@@ -39,6 +39,7 @@ api.add_resource(AdvanceWeek, '/admin/advance_week',  methods=['PUT'])
 api.add_resource(AdminTeam, '/admin/player_team', methods=['PUT', 'DELETE'])
 api.add_resource(UserMessage, '/user/<string:user_id>/messages')
 api.add_resource(AdminUserMessage, '/admin/user/message')
+api.add_resource(PlayerTeamRegistrationStatus, '/league/<string:league_id>/registration_status/<string:user_id>')
 
 from models.user import UserModel
 

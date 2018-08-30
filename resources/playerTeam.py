@@ -55,8 +55,10 @@ class PlayerTeam(Resource):
                 user = UserModel.find_by_user_id(data['user_id'])
                 return FreeLeagueRegisterController.register(league, team, user)
             else:
-                team.team_name = data['team_name']
-                team.upsert()
+                return {'message': 'League type not yet implemented.'}, 402
+        else:
+            team.team_name = data['team_name']
+            team.upsert()
 
         return team.json(), 201
 
@@ -79,3 +81,29 @@ class PlayerTeam(Resource):
             }, 500
 
         return {'message': 'Team deleted'}, 200
+
+
+class PlayerTeamRegistrationStatus(Resource):
+
+    def get(self, league_id, user_id):
+        league = LeagueModel.find_league_by_id(league_id)
+        user = UserModel.find_by_user_id(user_id)
+
+        if not league:
+            return {'message': 'League not found.'}, 404
+        if not user:
+            return {'message': 'User not found'}, 404
+
+        league_type_name = league.league_type.league_type_name
+
+        if league_type_name == LeagueTypes.STANDARD.name:
+            return {'league_open': StandardLeagueRegisterController.validate(league)}, 200
+        elif league_type_name == LeagueTypes.FREE.name:
+            return {'league_open': FreeLeagueRegisterController.full_validate(league, user)}, 200
+        else:
+            return {'message': 'League type not yet implemented.'}, 402
+
+
+
+
+

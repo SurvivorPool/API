@@ -12,4 +12,4 @@ class StandardLeagueRegisterController(BaseLeagueRegisterController):
 
     @classmethod
     def validate(cls, league):
-        return super().validate()
+        return super().validate(league)
