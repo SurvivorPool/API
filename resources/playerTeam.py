@@ -85,6 +85,7 @@ class PlayerTeam(Resource):
 
 class PlayerTeamRegistrationStatus(Resource):
 
+    @login_required
     def get(self, league_id, user_id):
         league = LeagueModel.find_league_by_id(league_id)
         user = UserModel.find_by_user_id(user_id)

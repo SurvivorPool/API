@@ -39,3 +39,16 @@ class AdminTeam(Resource):
         team.delete()
 
         return {'message': 'team was successfully deleted.'}
+
+
+class AdminTeams(Resource):
+
+    @admin_required
+    def get(self):
+        teams = PlayerTeamModel.get_all_player_teams()
+
+        return {
+            'teams': [team.json() for team in teams]
+        }
+
+

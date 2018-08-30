@@ -98,6 +98,10 @@ class PlayerTeamModel(db.Model):
         return league_set
 
     @classmethod
+    def get_all_player_teams(cls):
+        return cls.query.all()
+
+    @classmethod
     def get_active_teams_in_league(cls, league_id):
         return cls.query.filter_by(league_id=league_id, is_active=True)
 

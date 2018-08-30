@@ -75,3 +75,13 @@ class UserExistence(Resource):
         user = UserModel.find_by_user_id(user_id)
         exists = True if user else False
         return {'exists': exists}, 200
+
+
+class AdminUsers(Resource):
+
+    @authentication.admin_required
+    def get(self):
+        users = UserModel.get_all_users()
+        return {
+            'users': [user.json() for user in users]
+        }
