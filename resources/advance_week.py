@@ -1,7 +1,7 @@
 from flask_restplus import Resource
 from models.league import LeagueModel, LeagueTypes
 from models.game import GameModel
-from controllers import StandardLeagueAdvanceController
+from controllers import StandardLeagueAdvanceController, FreeLeagueAdvanceController
 
 
 class AdvanceWeek(Resource):
@@ -16,6 +16,8 @@ class AdvanceWeek(Resource):
         for league in all_leagues:
             if league.league_type.league_type_name == LeagueTypes.STANDARD.name:
                 return StandardLeagueAdvanceController.advance_week(league)
+            elif league.league_type.league_type_name == LeagueTypes.FREE.name:
+                return FreeLeagueAdvanceController.advance_week(league)
             else:
                 return {'message': 'Advancing for this league type has not been implemented'}
         return {'message': 'No Leagues found'}

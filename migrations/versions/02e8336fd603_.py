@@ -28,6 +28,8 @@ def upgrade():
 
     op.bulk_insert(league_type_table, [{'league_type_name': 'STANDARD',
                                   'league_type_description': 'Standard Survivor Pool League'}])
+    op.bulk_insert(league_type_table, [{'league_type_name': 'FREE',
+                                        'league_type_description': 'Free Survivor Pool League'}])
     # ### end Alembic commands ###
 
 

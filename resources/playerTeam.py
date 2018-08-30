@@ -5,7 +5,11 @@ from authentication \
 
 import app
 from models.playerTeam import PlayerTeamModel
+from models.league import LeagueModel
+from models.league_type import LeagueTypes
+from models.user import UserModel
 api = app.api
+from controllers import StandardLeagueRegisterController, FreeLeagueRegisterController
 
 
 class PlayerTeam(Resource):
@@ -41,17 +45,18 @@ class PlayerTeam(Resource):
         team = PlayerTeamModel.find_by_team_id(data['team_id'])
 
         if team is None:
+            league = LeagueModel.find_league_by_id(data['league_id'])
             team = PlayerTeamModel(data['user_id'], data['league_id'],
                                    data['team_name'])
-        else:
-            team.team_name = data['team_name']
-
-        try:
-            team.upsert()
-        except:
-            return {
-                'message': 'An error occurred inserting the player team'
-            }, 500
+            league_type_name = league.league_type.league_type_name
+            if league_type_name == LeagueTypes.STANDARD.name:
+                return StandardLeagueRegisterController.register(league, team)
+            elif league_type_name == LeagueTypes.FREE.name:
+                user = UserModel.find_by_user_id(data['user_id'])
+                return FreeLeagueRegisterController.register(league, team, user)
+            else:
+                team.team_name = data['team_name']
+                team.upsert()
 
         return team.json(), 201
 

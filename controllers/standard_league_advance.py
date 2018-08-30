@@ -14,11 +14,7 @@ class StandardLeagueAdvanceController:
     @classmethod
     def advance_week(cls, league):
         GameController.update_games()
-        league_type_name = league.league_type.league_type_name
         week_num = GameModel.get_max_week()
-
-        if not league_type_name == LeagueTypes.STANDARD.name:
-            return {'message': 'League is not Standard.'}
 
         active_teams = PlayerTeamModel.get_active_teams_in_league(league.league_id)
         losing_nfl_teams = GameController.get_losers_for_week(week_num)

@@ -6,7 +6,7 @@ import models
 PlayerTeamModel = models.PlayerTeamModel
 
 StandardLeaguePickController = controllers.StandardLeaguePickController
-
+FreeLeaguePickController = controllers.FreeLeaguePickController
 
 class Pick(Resource):
     parser = reqparse.RequestParser()
@@ -30,6 +30,8 @@ class Pick(Resource):
             league_type_name = team.league.league_type.league_type_name
             if league_type_name == LeagueTypes.STANDARD.name:
                 return StandardLeaguePickController.validate_pick(data)
+            elif league_type_name == LeagueTypes.FREE.name:
+                return FreeLeaguePickController.validate_pick(data)
             else:
                 raise NotImplementedError
 

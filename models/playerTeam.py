@@ -18,8 +18,6 @@ class PlayerTeamModel(db.Model):
     league = db.relationship('LeagueModel')
     team_picks = db.relationship('PickModel')
 
-    current_week = GameModel.get_max_week()
-
     def __init__(self, user_id, league_id, team_name):
         self.user_id = user_id
         self.league_id = league_id
@@ -29,6 +27,7 @@ class PlayerTeamModel(db.Model):
         self.streak = 0
 
     def json(self):
+        current_week = GameModel.get_max_week()
         return {
             'team_id': self.team_id,
             'user_info': self.user.user_json(),
@@ -38,10 +37,11 @@ class PlayerTeamModel(db.Model):
             'has_paid': self.has_paid,
             'current_pick': [
                 pick.nfl_team_name for pick in self.team_picks
-                if pick.week_num == self.current_week
+                if pick.week_num == current_week
             ],
-            'pick_history': [pick.json_basic() for pick in self.team_picks],
-            'streak': self.streak
+            'pick_history': [pick.json_basic() for pick in self.team_picks if pick.week_num != current_week],
+            'streak': self.streak,
+            'current_week': current_week
         }
 
     def json_basic(self):
@@ -55,6 +55,7 @@ class PlayerTeamModel(db.Model):
         }
 
     def json_for_user(self):
+        current_week = GameModel.get_max_week()
         return {
             'team_id': self.team_id,
             'league_id': self.league_id,
@@ -63,9 +64,10 @@ class PlayerTeamModel(db.Model):
             'has_paid': self.has_paid,
             'current_pick': [
                 pick.nfl_team_name for pick in self.team_picks
-                if pick.week_num == self.current_week],
-            'pick_history': [pick.json_basic() for pick in self.team_picks],
-            'streak': self.streak
+                if pick.week_num == current_week],
+            'pick_history': [pick.json_basic() for pick in self.team_picks if pick.week_num != current_week],
+            'streak': self.streak,
+            'current_week': current_week
         }
 
     def upsert(self):

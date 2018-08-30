@@ -19,7 +19,8 @@ class LeagueTypeModel(db.Model):
 
 
 class LeagueTypes(Enum):
-    STANDARD = 1
+    STANDARD = 1,
+    FREE = 2
 
 
 
