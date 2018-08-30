@@ -4,6 +4,7 @@ from authentication import admin_required
 
 
 class Stadium(Resource):
+    @admin_required
     def put(self):
         return self.populate_stadiums()
 

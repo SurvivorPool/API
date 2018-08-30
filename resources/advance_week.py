@@ -2,10 +2,11 @@ from flask_restplus import Resource
 from models.league import LeagueModel, LeagueTypes
 from models.game import GameModel
 from controllers import StandardLeagueAdvanceController, FreeLeagueAdvanceController
-
+import authentication
 
 class AdvanceWeek(Resource):
 
+    @authentication.admin_required
     def put(self):
         #TODO:UNCOMMENT
         week_num = GameModel.get_max_week()

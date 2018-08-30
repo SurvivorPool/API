@@ -8,8 +8,8 @@ from models.playerTeam import PlayerTeamModel
 from models.league import LeagueModel
 from models.league_type import LeagueTypes
 from models.user import UserModel
-api = app.api
 from controllers import StandardLeagueRegisterController, FreeLeagueRegisterController
+api = app.api
 
 
 class PlayerTeam(Resource):

@@ -5,6 +5,7 @@ from authentication import admin_required
 
 class NFLTeam(Resource):
 
+    @admin_required
     def put(self):
         return self.populate_teams()
 

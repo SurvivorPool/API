@@ -8,6 +8,7 @@ PlayerTeamModel = models.PlayerTeamModel
 StandardLeaguePickController = controllers.StandardLeaguePickController
 FreeLeaguePickController = controllers.FreeLeaguePickController
 
+
 class Pick(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument(

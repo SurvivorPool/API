@@ -3,6 +3,7 @@ from flask_restplus import Resource, reqparse
 from models.user_message import UserMessageModel
 from authentication import user_and_session_match_url_param, admin_required
 
+
 class UserMessage(Resource):
     parser = reqparse.RequestParser(bundle_errors=True)
 
@@ -34,9 +35,6 @@ class AdminUserMessage(Resource):
     parser = reqparse.RequestParser(bundle_errors=True)
     parser.add_argument(
         'user_ids', type=str, required=True, help='user_ids cannot be null', action="split")
-
-    def get(self):
-        pass
 
     @admin_required
     def post(self):
