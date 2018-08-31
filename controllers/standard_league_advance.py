@@ -6,8 +6,6 @@ from config import Config
 from app.email import send_email
 from models.league_type import LeagueTypes
 
-from .game import GameController
-
 
 class StandardLeagueAdvanceController:
 
@@ -17,6 +15,7 @@ class StandardLeagueAdvanceController:
         week_num = GameModel.get_max_week()
 
         active_teams = PlayerTeamModel.get_active_teams_in_league(league.league_id)
+
         losing_nfl_teams = GameController.get_losers_for_week(week_num)
         deactivated_teams = []
         advancing_teams = []
@@ -39,8 +38,8 @@ class StandardLeagueAdvanceController:
         #         send_email("Sorry, you've been eliminated", Config.MAIL_USERNAME, team.user, team)
 
         return {
-            'deactivated_teams': [deactivated_team.json() for deactivated_team in deactivated_teams],
-            'advancing_teams': [advancing_team.json() for advancing_team in advancing_teams]
+            'deactivated_teams': deactivated_teams,
+            'advancing_teams': advancing_teams
         }
 
 

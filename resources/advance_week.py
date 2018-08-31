@@ -6,21 +6,31 @@ import authentication
 
 class AdvanceWeek(Resource):
 
-    @authentication.admin_required
+    #@authentication.admin_required
     def put(self):
         #TODO:UNCOMMENT
         week_num = GameModel.get_max_week()
         # if GameModel.week_has_unfinished_games(week_num):
         #     return {'message': 'Not all games finished'}
 
-        all_leagues = LeagueModel.find_all_leagues()
+        all_leagues = LeagueModel.find_all_started_leagues(week_num)
+        deactivated_teams = []
+        advancing_teams = []
+
         for league in all_leagues:
             if league.league_type.league_type_name == LeagueTypes.STANDARD.name:
-                return StandardLeagueAdvanceController.advance_week(league)
+                teams_dict = StandardLeagueAdvanceController.advance_week(league)
             elif league.league_type.league_type_name == LeagueTypes.FREE.name:
-                return FreeLeagueAdvanceController.advance_week(league)
+                teams_dict = FreeLeagueAdvanceController.advance_week(league)
             else:
-                return {'message': 'Advancing for this league type has not been implemented'}
-        return {'message': 'No Leagues found'}
+                raise NotImplementedError
+
+            deactivated_teams += (teams_dict['deactivated_teams'])
+            advancing_teams += (teams_dict['advancing_teams'])
+
+        return {
+            'deactivated_teams': [team.json() for team in deactivated_teams],
+            'advancing_teams': [team.json() for team in advancing_teams]
+                }
 
 

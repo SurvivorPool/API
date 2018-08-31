@@ -103,5 +103,5 @@ class PlayerTeamModel(db.Model):
 
     @classmethod
     def get_active_teams_in_league(cls, league_id):
-        return cls.query.filter_by(league_id=league_id, is_active=True)
+        return cls.query.filter_by(league_id=league_id, is_active=True).all()
 
