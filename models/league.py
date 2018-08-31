@@ -1,6 +1,9 @@
 import app
 from .game import GameModel
+from .user import UserModel
 from.league_type import LeagueTypes
+from controllers.free_league_register import  FreeLeagueRegisterController
+from controllers.standard_league_register import StandardLeagueRegisterController
 db = app.db
 
 
@@ -23,31 +26,36 @@ class LeagueModel(db.Model):
         self.price = price
 
     def json(self):
-        price = self.price / 100
-        return {
-            'league_id': self.league_id,
-            'league_name': self.league_name,
-            'league_type': self.league_type.league_type_name,
-            'league_description': self.league_description,
-            'price': "{:,.2f}".format(price),
-            'current_week': GameModel.get_max_week(),
-            'teams': [team.json_basic() for team in self.teams],
-            'pot': price * len(self.teams),
-            'is_active': True
-        }
+        json = self.json_league_info()
+        json['current_week'] = GameModel.get_max_week()
+        json['teams'] = [team.json_basic() for team in self.teams]
+        return json
 
     def json_league_info(self):
         price = self.price / 100
         return {
             'league_id': self.league_id,
             'league_name': self.league_name,
-            'league_description': self.league_description,
             'league_type': self.league_type.league_type_name,
+            'league_description': self.league_description,
             'price': "{:,.2f}".format(price),
             'pot': price * len(self.teams),
-            'is_active': True,
             'start_week': self.start_week
         }
+
+    def json_league_info_with_active(self, user_id):
+        json = self.json_league_info()
+        json['is_active'] = self.get_active_status(user_id)
+        return json
+
+
+    def get_active_status(self, user_id):
+        if self.league_type.league_type_name == LeagueTypes.STANDARD.name:
+            return StandardLeagueRegisterController.full_validate(self)
+        elif self.league_type.league_type_name == LeagueTypes.FREE.name:
+            user = UserModel.find_by_user_id(user_id)
+            return FreeLeagueRegisterController.full_validate(self, user)
+
 
     def upsert(self):
         db.session.add(self)

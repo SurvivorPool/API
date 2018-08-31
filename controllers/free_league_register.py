@@ -20,8 +20,6 @@ class FreeLeagueRegisterController(BaseLeagueRegisterController):
 
     @classmethod
     def validate(cls, league, user):
-        for t in user.teams:
-            print(t.league_id == league.league_id)
         return len([player_team for player_team in user.teams if player_team.league_id == league.league_id]) == 0
 
 

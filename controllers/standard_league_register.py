@@ -10,6 +10,11 @@ class StandardLeagueRegisterController(BaseLeagueRegisterController):
 
         return super().register(team)
 
+
+    @classmethod
+    def full_validate(cls, league):
+        return cls.validate(league)
+
     @classmethod
     def validate(cls, league):
         return super().validate(league)

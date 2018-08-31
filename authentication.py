@@ -45,6 +45,23 @@ def login_required(f):
 
     return decorated_func
 
+
+def login_required_pass_along_user_id(f):
+    @wraps(f)
+    def decorated_func(*args, **kwargs):
+        try:
+            request_user_info = auth.verify_id_token(request.headers['auth'])
+
+        except:
+            return {'message': 'Unable to authenticate'}, 403
+
+        kwargs['authenticated_user_id'] = request_user_info['user_id']
+
+        return f(*args, **kwargs)
+
+    return decorated_func
+
+
 def user_and_session_match_url_param(f):
     @wraps(f)
     def decorated_func(*args, **kwargs):
@@ -55,7 +72,6 @@ def user_and_session_match_url_param(f):
             return {'message': 'Unable to authenticate'}, 403
 
         user = UserModel.find_by_user_id(request_user_info['user_id'])
-        print(user)
         if user is None or user.user_id != (kwargs['user_id']):
             return {'message': 'You are not the owner of this account.'}, 403
 
