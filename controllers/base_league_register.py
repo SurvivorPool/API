@@ -4,7 +4,7 @@ class BaseLeagueRegisterController:
 
     @classmethod
     def validate(cls, league):
-        return GameModel.week_has_unfinished_games(league.start_week)
+        return True #GameModel.week_has_unfinished_games(league.start_week)
 
     @classmethod
     def register(cls, team):
