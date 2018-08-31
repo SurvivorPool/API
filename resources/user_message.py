@@ -58,6 +58,7 @@ class AdminUserMessage(Resource):
 
 class AdminUserMessages(Resource):
 
+    @admin_required
     def get(self):
         messages = UserMessageModel.get_all_messages()
         return {'messages': [message.json() for message in messages]}

@@ -28,11 +28,14 @@ class League(Resource):
         'price', type=float, required=True, help='price cannot be null')
 
     @api.expect(league_swagger)
-    @login_required
-    def get(self, league_id):
+    @login_required_pass_along_user_id
+    def get(self, league_id, **kwargs):
         league = LeagueModel.find_league_by_id(league_id)
         if league:
-            return league.json()
+            league_json = league.json()
+            league_json['is_active'] = league.get_active_status(kwargs['authenticated_user_id'])
+            return league_json
+
         return {'message': 'League not found'}, 404
 
     @api.expect(parser)
