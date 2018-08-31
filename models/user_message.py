@@ -47,6 +47,10 @@ class UserMessageModel(db.Model):
     def find_by_message_id(cls, message_id):
         return cls.query.filter_by(message_id=message_id).first()
 
+    @classmethod
+    def get_all_messages(cls):
+        return cls.query.all()
+
 
 
 
