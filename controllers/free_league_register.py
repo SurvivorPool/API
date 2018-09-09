@@ -11,7 +11,7 @@ class FreeLeagueRegisterController(BaseLeagueRegisterController):
 
         if not super().validate(league):
             return {'message': 'Cannot join league. No games left in pregame.'.format(league.start_week)}, 401
-
+        team.has_paid = True
         return super().register(team)
 
     @classmethod
