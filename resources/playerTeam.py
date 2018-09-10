@@ -1,7 +1,7 @@
 from flask_restplus import Resource, reqparse, fields
 from authentication \
     import player_team_ownership_required_url_param, \
-    player_team_ownership_required_json_param, login_required
+    player_team_ownership_required_json_param, login_required, user_and_session_match_json_param
 
 import app
 from models.playerTeam import PlayerTeamModel
@@ -26,7 +26,7 @@ class PlayerTeam(Resource):
             return team.json(), 200
         return {'message': 'Could not find a team with that id.'}, 404
 
-    @login_required
+    @user_and_session_match_json_param
     def put(self):
         parser = reqparse.RequestParser()
         parser.add_argument(
