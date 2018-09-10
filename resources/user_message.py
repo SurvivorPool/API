@@ -36,6 +36,7 @@ class AdminUserMessage(Resource):
     parser.add_argument(
         'user_ids', type=str, required=True, help='user_ids cannot be null', action="split")
     parser.add_argument('all_users', type=bool, required=True, help='all_users bool is required.')
+    parser.add_argument('message_text', required=True, help='message_text cannot be null')
 
     @admin_required
     def put(self):
@@ -45,11 +46,15 @@ class AdminUserMessage(Resource):
             users = UserModel.get_all_users()
             user_ids = [user.user_id for user in users]
         else:
+            data.user_ids = list(filter(None, data.user_ids))
+            if data.user_ids is None or len(data.user_ids) == 0:
+                return {'message':  'user_ids cannot be empty if all_users is not selected.'}, 401
+
             user_ids = data.user_ids
 
         messages = []
         for user_id in user_ids:
-            message = UserMessageModel('new message', 1, datetime.utcnow(), user_id)
+            message = UserMessageModel(data['message_text'], 1, datetime.utcnow(), user_id)
             message.upsert()
             messages.append(message)
 
