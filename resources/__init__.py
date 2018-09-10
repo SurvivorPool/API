@@ -8,3 +8,4 @@ from .stadium import Stadium
 from .advance_week import AdvanceWeek
 from .admin_team import AdminTeam, AdminTeams
 from .user_message import UserMessage, AdminUserMessage, AdminUserMessages
+from .stats import StatisticsResource

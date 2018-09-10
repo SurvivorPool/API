@@ -1,3 +1,5 @@
+from sqlalchemy import func
+from sqlalchemy.sql import label
 import app
 import models.playerTeam as playerTeam
 from models.game import GameModel
@@ -81,3 +83,15 @@ class PickModel(db.Model):
     @classmethod
     def find_pick_by_week_and_team_id(cls, week_num, team_id):
         return cls.query.filter_by(team_id=team_id, week_num=week_num).first()
+
+    @classmethod
+    def find_previous_week_picks_for_league(cls, league_id):
+        prev_week_num = GameModel.get_max_week() - 1
+        return db.session.query(cls.nfl_team_name, label('count', func.count(cls.nfl_team_name))).filter_by(week_num=prev_week_num)\
+            .join(cls.player_team).filter_by(league_id=league_id).group_by(cls.nfl_team_name).all()
+
+    @classmethod
+    def find_all_picks(cls):
+        prev_week_num = GameModel.get_max_week() - 1
+        return db.session.query(cls.nfl_team_name, label('count', func.count(cls.nfl_team_name))).filter_by(
+            week_num=prev_week_num).group_by(cls.nfl_team_name).all()
