@@ -1,3 +1,5 @@
+from sqlalchemy import func
+from sqlalchemy.sql import label
 import app
 from .game import GameModel
 db = app.db
@@ -105,3 +107,9 @@ class PlayerTeamModel(db.Model):
     def get_active_teams_in_league(cls, league_id):
         return cls.query.filter_by(league_id=league_id, is_active=True).all()
 
+    @classmethod
+    def get_all_teams_in_league(cls, league_id):
+        return cls.query.filter_by(league_id=league_id).all()
+
+    #return db.session.query(cls.nfl_team_name, label('count', func.count(cls.nfl_team_name))).filter_by(
+      #      week_num=prev_week_num).group_by(cls.nfl_team_name).all()
