@@ -72,6 +72,19 @@ class PlayerTeamModel(db.Model):
             'current_week': current_week
         }
 
+    def json_advance_week(self):
+        current_week = GameModel.get_max_week()
+        return {
+            'team_id': self.team_id,
+            'team_name': self.team_name,
+            'is_active': self.is_active,
+            'current_pick': [
+                pick.nfl_team_name for pick in self.team_picks
+                if pick.week_num == current_week],
+            'streak': self.streak,
+            'league_info': self.league.json_league_info(),
+        }
+
     def upsert(self):
         db.session.add(self)
         db.session.commit()

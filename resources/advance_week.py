@@ -6,12 +6,11 @@ import authentication
 
 class AdvanceWeek(Resource):
 
-    #@authentication.admin_required
+    @authentication.admin_required
     def put(self):
-        #TODO:UNCOMMENT
         week_num = GameModel.get_max_week()
-        # if GameModel.week_has_unfinished_games(week_num):
-        #     return {'message': 'Not all games finished'}
+        if GameModel.week_has_unfinished_games(week_num):
+            return {'message': 'Not all games finished'}
 
         all_leagues = LeagueModel.find_all_started_leagues(week_num)
         deactivated_teams = []
@@ -29,8 +28,8 @@ class AdvanceWeek(Resource):
             advancing_teams += (teams_dict['advancing_teams'])
 
         return {
-            'deactivated_teams': [team.json() for team in deactivated_teams],
-            'advancing_teams': [team.json() for team in advancing_teams]
+            'deactivated_teams': [team.json_advance_week() for team in deactivated_teams],
+            'advancing_teams': [team.json_advance_week() for team in advancing_teams]
                 }
 
 
