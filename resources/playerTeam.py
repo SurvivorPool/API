@@ -27,6 +27,7 @@ class PlayerTeam(Resource):
         return {'message': 'Could not find a team with that id.'}, 404
 
     @user_and_session_match_json_param
+    @player_team_ownership_required_json_param
     def put(self):
         parser = reqparse.RequestParser()
         parser.add_argument(
