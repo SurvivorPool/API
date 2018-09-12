@@ -105,7 +105,7 @@ def player_team_ownership_required_url_param(f):
         try:
             request_user_info = auth.verify_id_token(request.headers['auth'])
             team = PlayerTeamModel.find_by_team_id(kwargs['team_id'])
-            
+
         except:
             return {'message': 'Unable to authenticate'}, 403
 
