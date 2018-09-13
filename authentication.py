@@ -125,7 +125,7 @@ def player_team_ownership_required_json_param(f):
             request_data = request.get_json()
             team = PlayerTeamModel.find_by_team_id(request_data['team_id'])
             if team is None:
-                return {'message': 'Team not found'}, 401
+                return {'message': 'Team not found'}, 403
 
             if team.user_id != request_user_info['user_id']:
                 return {'message': 'You are not the owner of this team.'}, 403
@@ -145,11 +145,11 @@ def admin_required(f):
         try:
             request_user_info = auth.verify_id_token(request.headers['auth'])
         except:
-            return {'message': 'User not an administrator.'}, 500
+            return {'message': 'User not an administrator.'}, 403
 
         user = UserModel.find_by_user_id(request_user_info['user_id'])
         if not user.is_admin:
-            return {'message': 'User not an administrator.'}, 404
+            return {'message': 'User not an administrator.'}, 403
 
         return f(*args, **kwargs)
 
