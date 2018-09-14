@@ -10,3 +10,4 @@ serviceAccountKey.json
 .idea/*
 .vscode/*
 .vscode
+*.swp
