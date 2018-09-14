@@ -27,6 +27,9 @@ class Pick(Resource):
 
         team = PlayerTeamModel.find_by_team_id(data['team_id'])
 
+        if not team.is_active:
+            return {'message': 'This team is inactive'}, 401
+
         if team:
             league_type_name = team.league.league_type.league_type_name
             if league_type_name == LeagueTypes.STANDARD.name:

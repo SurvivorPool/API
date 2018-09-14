@@ -1,6 +1,7 @@
 from models.pick import PickModel
 from models.game import GameModel
 from .game import GameController
+from models.nfl_team import NFLTeamModel
 
 
 class StandardLeaguePickController:
@@ -12,6 +13,13 @@ class StandardLeaguePickController:
         GameController.update_games()
 
         game = GameModel.find_by_game_id(data['game_id'])
+        nfl_team = NFLTeamModel.find_by_team_name(data['nfl_team_name'])
+
+        if game is None:
+            return {'message': 'Cannot find game with that id.'}, 401
+
+        if nfl_team is None:
+            return {'message': 'Cannot find nfl_team with that name'}, 401
 
         if game.quarter != 'P':
             return {

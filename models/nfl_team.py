@@ -29,6 +29,10 @@ class NFLTeamModel(db.Model):
     def find_by_team_id(cls, nfl_team_id):
         return cls.query.filter_by(nfl_team_id=nfl_team_id).first()
 
+    @classmethod
+    def find_by_team_name(cls, nfl_team_name):
+        return cls.query.filter_by(nickname=nfl_team_name).first()
+
     def json(self):
         return {
             'nfl_team_id': self.nfl_team_id,
