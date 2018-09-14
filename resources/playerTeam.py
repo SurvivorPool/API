@@ -8,6 +8,7 @@ from models.playerTeam import PlayerTeamModel
 from models.league import LeagueModel
 from models.league_type import LeagueTypes
 from models.user import UserModel
+from models.pick import PickModel
 from controllers import StandardLeagueRegisterController, FreeLeagueRegisterController
 api = app.api
 
@@ -73,6 +74,13 @@ class PlayerTeam(Resource):
         data = parser.parse_args()
 
         team = PlayerTeamModel.find_by_team_id(data['team_id'])
+        picks = PickModel.find_team_picks(data['team_id'])
+
+        if len(picks) > 0:
+            return {'message': 'Cannot delete this team. Picks are associated to it still.'}, 500
+
+        if team.has_paid:
+            return {'message': 'Cannot delete team that has been marked as paid. '}, 500
 
         try:
             team.delete()

@@ -55,7 +55,7 @@ class PickModel(db.Model):
 
     @classmethod
     def find_team_picks(cls, team_id):
-        return cls.query.filter_by(team_id=team_id)
+        return cls.query.filter_by(team_id=team_id).all()
 
     @classmethod
     def find_previous_team_picks(cls, team_id):
