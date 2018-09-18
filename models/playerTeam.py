@@ -47,13 +47,25 @@ class PlayerTeamModel(db.Model):
         }
 
     def json_basic(self):
+        current_week = GameModel.get_max_week()
+        current_pick_array = [pick for pick in self.team_picks if pick.week_num == current_week]
+        
+        current_pick = current_pick_array[0] if current_pick_array else None
+        
+        currently_picked_team = None
+        
+        if current_pick:
+            if current_pick.game.quarter != 'P':
+                currently_picked_team = current_pick.nfl_team_name
+
         return {
             'team_id': self.team_id,
             'user_info': self.user.user_json(),
             'team_name': self.team_name,
             'is_active': self.is_active,
             'has_paid': self.has_paid,
-            'streak': self.streak
+            'streak': self.streak,
+            'current_pick': currently_picked_team
         }
 
     def json_for_user(self):

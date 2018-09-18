@@ -56,7 +56,6 @@ class LeagueModel(db.Model):
             user = UserModel.find_by_user_id(user_id)
             return FreeLeagueRegisterController.full_validate(self, user)
 
-
     def upsert(self):
         db.session.add(self)
         db.session.commit()
