@@ -41,7 +41,8 @@ class LeagueModel(db.Model):
             'league_description': self.league_description,
             'price': "{:,.2f}".format(price),
             'pot': price * len(self.teams),
-            'start_week': self.start_week
+            'start_week': self.start_week,
+            'completed': self.completed
         }
 
     def json_league_info_with_active(self, user_id):
