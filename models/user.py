@@ -41,7 +41,8 @@ class UserModel(db.Model):
             'is_admin': self.is_admin,
             'picture_url': self.picture_url,
             'receive_notifications': self.receive_notifications,
-            'teams': [team.json_for_user() for team in self.teams]
+            'teams': [team.json_for_user() for team in self.teams],
+            'leagues_won': self.leagues_won
         }
 
     def json_user_owner_basic(self):
@@ -51,7 +52,8 @@ class UserModel(db.Model):
             'email': self.email,
             'is_admin': self.is_admin,
             'picture_url': self.picture_url,
-            'receive_notifications': self.receive_notifications
+            'receive_notifications': self.receive_notifications,
+            'leagues_won': self.leagues_won
         }
 
     def user_json(self):
@@ -60,7 +62,8 @@ class UserModel(db.Model):
             'full_name': self.full_name,
             'email': self.email,
             'is_admin': self.is_admin,
-            'picture_url': self.picture_url
+            'picture_url': self.picture_url,
+            'leagues_won': self.leagues_won
         }
 
     def upsert(self):
