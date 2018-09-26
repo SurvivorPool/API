@@ -17,6 +17,7 @@ class LeagueModel(db.Model):
     league_type_id = db.Column(db.Integer, db.ForeignKey('league_types.league_type_id'),
                                default=LeagueTypes.STANDARD.value, server_default=str(LeagueTypes.STANDARD.value))
     start_week = db.Column(db.Integer, nullable=False, default=1, server_default="1")
+    completed = db.Column(db.Integer, nullable=False, default=0, server_default="0")
     teams = db.relationship("PlayerTeamModel", order_by="desc(PlayerTeamModel.is_active), desc(PlayerTeamModel.streak)")
     league_type = db.relationship("LeagueTypeModel")
 
