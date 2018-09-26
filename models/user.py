@@ -12,6 +12,7 @@ class UserModel(db.Model):
     is_admin = db.Column(db.Boolean)
     picture_url = db.Column(db.String(200))
     receive_notifications = db.Column(db.Boolean, default=True, server_default="True", nullable=False)
+    leagues_won = db.Column(db.Integer, nullable=False, default=0, server_default="0")
     teams = db.relationship('PlayerTeamModel')
 
     def __init__(self, user_id, full_name, email, picture_url):
