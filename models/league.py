@@ -17,7 +17,7 @@ class LeagueModel(db.Model):
     league_type_id = db.Column(db.Integer, db.ForeignKey('league_types.league_type_id'),
                                default=LeagueTypes.STANDARD.value, server_default=str(LeagueTypes.STANDARD.value))
     start_week = db.Column(db.Integer, nullable=False, default=1, server_default="1")
-    #completed = db.Column(db.Boolean, nullable=False, default=False, server_default="false")
+    completed = db.Column(db.Boolean, nullable=False, default=False, server_default="false")
     teams = db.relationship("PlayerTeamModel", order_by="desc(PlayerTeamModel.is_active), desc(PlayerTeamModel.streak)")
     league_type = db.relationship("LeagueTypeModel")
 
@@ -42,7 +42,7 @@ class LeagueModel(db.Model):
             'price': "{:,.2f}".format(price),
             'pot': price * len(self.teams),
             'start_week': self.start_week,
-            #'completed': self.completed
+            'completed': self.completed
         }
 
     def json_league_info_with_active(self, user_id):
