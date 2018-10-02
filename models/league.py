@@ -1,9 +1,11 @@
 import app
+from sqlalchemy.sql.expression import and_
 from .game import GameModel
 from .user import UserModel
-from.league_type import LeagueTypes
-from controllers.free_league_register import  FreeLeagueRegisterController
+from .league_type import LeagueTypes
+from controllers.free_league_register import FreeLeagueRegisterController
 from controllers.standard_league_register import StandardLeagueRegisterController
+
 db = app.db
 
 
@@ -50,7 +52,6 @@ class LeagueModel(db.Model):
         json['is_active'] = self.get_active_status(user_id)
         return json
 
-
     def get_active_status(self, user_id):
         if self.league_type.league_type_name == LeagueTypes.STANDARD.name:
             return StandardLeagueRegisterController.full_validate(self)
@@ -72,4 +73,4 @@ class LeagueModel(db.Model):
 
     @classmethod
     def find_all_started_leagues(cls, current_week):
-        return cls.query.filter(cls.start_week <= current_week).all()
+        return cls.query.filter(cls.start_week <= current_week, cls.completed == False).all()
