@@ -7,7 +7,7 @@ class StadiumModel(db.Model):
     stadium_id = db.Column(db.Integer, primary_key=True)
     city = db.Column(db.String(40), nullable=False)
     stadium_name = db.Column(db.String(100), nullable=False)
-    stadium_state = db.Column(db.String(5), nullable=False)
+    stadium_state = db.Column(db.String(5), nullable=True)
     roof_type = db.Column(db.String(40), nullable=False)
 
     def __init__(self, stadium_id, city, stadium_name, stadium_state, roof_type):
