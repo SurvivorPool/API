@@ -11,7 +11,7 @@ class StandardLeagueAdvanceController:
 
     @classmethod
     def advance_week(cls, league):
-        GameController.update_games()
+        #GameController.update_games()
         week_num = GameModel.get_max_week()
 
         active_teams = PlayerTeamModel.get_active_teams_in_league(league.league_id)
@@ -23,19 +23,20 @@ class StandardLeagueAdvanceController:
             pick = PickModel.find_pick_by_week_and_team_id(week_num, active_team.team_id)
 
             if pick is None:
-                deactivated_teams.append(active_team)
+                pass
+                #deactivated_teams.append(active_team)
             else:
                 if pick.nfl_team_name in losing_nfl_teams:
-                    active_team.is_active = False
+                    #active_team.is_active = False
                     deactivated_teams.append(active_team)
                 else:
-                    active_team.streak += 1
+                    #active_team.streak += 1
                     advancing_teams.append(active_team)
-                active_team.upsert()
+                # active_team.upsert()
 
-        for team in deactivated_teams:
-            if team.user.receive_notifications:
-                send_email("Sorry, you've been eliminated", Config.MAIL_USERNAME, team.user, team)
+        # for team in deactivated_teams:
+        #     if team.user.receive_notifications:
+        #         send_email("Sorry, you've been eliminated", Config.MAIL_USERNAME, team.user, team)
 
         return {
             'deactivated_teams': deactivated_teams,
