@@ -6,6 +6,8 @@ from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from config import Config
 
+
+
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
@@ -13,6 +15,8 @@ migrate = Migrate(app, db)
 api = Api(app)
 mail = Mail(app)
 bootstrap = Bootstrap(app)
+
+
 
 from resources import GamesList, User, UserExistence, PlayerTeam, PlayerTeamRegistrationStatus,  League, \
     LeaguesList, LeaguesByUser, Pick, AdminGames, NFLTeam, Stadium, AdvanceWeek,\
@@ -51,3 +55,38 @@ def email_request():
     return render_template('league_lost.html', user=UserModel('user_id', 'alex berardi', 'alexmberardi@gmail.com', 'google.com'))
 
 
+def advance_week():
+    week_num = GameModel.get_max_week()
+    if GameModel.week_has_unfinished_games(week_num):
+        return {'message': 'Not all games finished'}
+
+    all_leagues = LeagueModel.find_all_started_leagues(week_num)
+
+    deactivated_teams = []
+    advancing_teams = []
+
+    for league in all_leagues:
+        if league.league_type.league_type_name == LeagueTypes.STANDARD.name:
+            teams_dict = StandardLeagueAdvanceController.advance_week(league)
+        elif league.league_type.league_type_name == LeagueTypes.FREE.name:
+            teams_dict = FreeLeagueAdvanceController.advance_week(league)
+        else:
+            raise NotImplementedError
+
+        deactivated_teams += (teams_dict['deactivated_teams'])
+        advancing_teams += (teams_dict['advancing_teams'])
+        print("DONE ADVANCING")
+
+
+from models import GameModel, LeagueModel
+from models.league import LeagueTypes
+from controllers import StandardLeagueAdvanceController, FreeLeagueAdvanceController
+import atexit
+from apscheduler.schedulers.background import BackgroundScheduler
+scheduler = BackgroundScheduler()
+
+scheduler.add_job(advance_week, "cron", day_of_week="tue", hour=19, minute="20")
+scheduler.start()
+
+# Shut down the scheduler when exiting the app
+atexit.register(lambda: scheduler.shutdown())
