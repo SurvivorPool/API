@@ -85,7 +85,7 @@ import atexit
 from apscheduler.schedulers.background import BackgroundScheduler
 scheduler = BackgroundScheduler()
 
-scheduler.add_job(advance_week, "cron", day_of_week="tue", hour=19, minute="25")
+scheduler.add_job(advance_week, "cron", day_of_week="tue", hour=23, minute="28")
 scheduler.start()
 
 # Shut down the scheduler when exiting the app
