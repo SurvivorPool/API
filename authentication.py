@@ -86,7 +86,7 @@ def user_and_session_match_json_param(f):
         try:
             request_user_info = auth.verify_id_token(request.headers['auth'])
         except:
-            return {'message': 'Unable to authenticate'}, 403
+            return {'message': 'Unable to authenticate'}, 407
 
         request_data = request.get_json()
         user = UserModel.find_by_user_id(request_data['user_id'])
@@ -131,7 +131,7 @@ def player_team_ownership_required_json_param(f):
                 return {'message': 'You are not the owner of this team.'}, 403
 
         except:
-            return {'message': 'Unable to authenticate'}, 403
+            return {'message': 'Unable to authenticate'}, 423
 
         return f(*args, **kwargs)
 
