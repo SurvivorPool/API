@@ -120,19 +120,16 @@ def player_team_ownership_required_url_param(f):
 def player_team_ownership_required_json_param(f):
     @wraps(f)
     def decorated_func(*args, **kwargs):
-        try:
-            request_user_info = auth.verify_id_token(request.headers['auth'])
-            request_data = request.get_json()
-            if request_data['team_id'] is not None:
-                team = PlayerTeamModel.find_by_team_id(request_data['team_id'])
-            if team is None:
-                return {'message': 'Team not found'}, 403
+        request_user_info = auth.verify_id_token(request.headers['auth'])
+        request_data = request.get_json()
+        if "team_id" in request_data:
+            team = PlayerTeamModel.find_by_team_id(request_data['team_id'])
+        if team is None:
+            return {'message': 'Team not found'}, 403
 
-            if team.user_id != request_user_info['user_id']:
-                return {'message': 'You are not the owner of this team.'}, 403
+        if team.user_id != request_user_info['user_id']:
+            return {'message': 'You are not the owner of this team.'}, 403
 
-        except:
-            return {'message': 'Unable to authenticate'}, 403
 
         return f(*args, **kwargs)
 
