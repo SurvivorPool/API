@@ -1,5 +1,6 @@
 from flask_restplus import Resource, reqparse
 from authentication import admin_required
+from models.pick import PickModel
 from models.playerTeam import PlayerTeamModel
 
 
@@ -35,6 +36,11 @@ class AdminTeam(Resource):
 
         if not team:
             return {'message': 'Team with that team_id cannot be found.'}, 401
+
+        picks = PickModel.find_team_picks(data['team_id'])
+
+        if picks is not None:
+            return {'message': 'Cannot delete this team. Picks are associated to it still.'}, 500
 
         team.delete()
 
