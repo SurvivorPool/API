@@ -7,29 +7,28 @@ from dotenv import load_dotenv
 import os
 from models.user import UserModel
 from models.playerTeam import PlayerTeamModel
-
 load_dotenv(verbose=True)
 cert = firebase_admin.credentials.Certificate({
     "type":
-        "service_account",
+    "service_account",
     "project_id":
-        os.getenv('FIREBASE_PROJECT_ID'),
+    os.getenv('FIREBASE_PROJECT_ID'),
     "private_key_id":
-        os.getenv('FIREBASE_PRIVATE_KEY_ID'),
+    os.getenv('FIREBASE_PRIVATE_KEY_ID'),
     "private_key":
-        os.getenv('FIREBASE_PRIVATE_KEY').replace('\\n', '\n'),
+    os.getenv('FIREBASE_PRIVATE_KEY').replace('\\n', '\n'),
     "client_email":
-        os.getenv('FIREBASE_CLIENT_EMAIL'),
+    os.getenv('FIREBASE_CLIENT_EMAIL'),
     "client_id":
-        os.getenv('FIREBASE_CLIENT_ID'),
+    os.getenv('FIREBASE_CLIENT_ID'),
     "auth_uri":
-        os.getenv('FIREBASE_AUTH_URI'),
+    os.getenv('FIREBASE_AUTH_URI'),
     "token_uri":
-        os.getenv('FIREBASE_TOKEN_URI'),
+    os.getenv('FIREBASE_TOKEN_URI'),
     "auth_provider_x509_cert_url":
-        os.getenv('FIREBASE_AUTH_PROVIDER_X509_CERT_URL'),
+    os.getenv('FIREBASE_AUTH_PROVIDER_X509_CERT_URL'),
     "client_x509_cert_url":
-        os.getenv('FIREBASE_CLIENT_X509_CERT_URL')
+    os.getenv('FIREBASE_CLIENT_X509_CERT_URL')
 })
 default_app = firebase_admin.initialize_app(cert)
 
@@ -76,8 +75,8 @@ def user_and_session_match_url_param(f):
         if user is None or user.user_id != (kwargs['user_id']):
             return {'message': 'You are not the owner of this account.'}, 403
 
-        return f(*args, **kwargs)
 
+        return f(*args, **kwargs)
     return decorated_func
 
 
@@ -121,14 +120,19 @@ def player_team_ownership_required_url_param(f):
 def player_team_ownership_required_json_param(f):
     @wraps(f)
     def decorated_func(*args, **kwargs):
-        request_user_info = auth.verify_id_token(request.headers['auth'])
-        request_data = request.get_json()
-        team = PlayerTeamModel.find_by_team_id(request_data['team_id'])
-        if team is None:
-            return {'message': 'Team not found'}, 403
+        try:
+            request_user_info = auth.verify_id_token(request.headers['auth'])
+            request_data = request.get_json()
+            if request_data['team_id'] is not None:
+                team = PlayerTeamModel.find_by_team_id(request_data['team_id'])
+            if team is None:
+                return {'message': 'Team not found'}, 403
 
-        if team.user_id != request_user_info['user_id']:
-            return {'message': 'You are not the owner of this team.'}, 403
+            if team.user_id != request_user_info['user_id']:
+                return {'message': 'You are not the owner of this team.'}, 403
+
+        except:
+            return {'message': 'Unable to authenticate'}, 403
 
         return f(*args, **kwargs)
 
