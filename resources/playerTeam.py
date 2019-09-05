@@ -76,7 +76,7 @@ class PlayerTeam(Resource):
         team = PlayerTeamModel.find_by_team_id(data['team_id'])
         picks = PickModel.find_team_picks(data['team_id'])
 
-        if len(picks) > 0:
+        if picks is not None:
             return {'message': 'Cannot delete this team. Picks are associated to it still.'}, 500
 
         if team.has_paid:
