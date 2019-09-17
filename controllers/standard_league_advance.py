@@ -23,6 +23,7 @@ class StandardLeagueAdvanceController:
             pick = PickModel.find_pick_by_week_and_team_id(week_num, active_team.team_id)
 
             if pick is None:
+                active_team.is_active = False
                 deactivated_teams.append(active_team)
             else:
                 if pick.nfl_team_name in losing_nfl_teams:
