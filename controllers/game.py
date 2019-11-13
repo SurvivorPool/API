@@ -1,4 +1,5 @@
 from models.game import GameModel
+from controllers.stadium import StadiumController
 from datetime import datetime
 import time
 import calendar
@@ -28,6 +29,7 @@ class GameController:
     def populate_games(cls):
         current_week = GameModel.get_max_week() or 0
         current_games = GameModel.get_games_by_week(current_week)
+        StadiumController.upsert_stadiums()
 
         for game in current_games:
             if game.quarter != 'F' and game.quarter != 'FO':
@@ -38,6 +40,7 @@ class GameController:
     @classmethod
     def update_games(cls):
         rss_feed = requests.get(cls.nfl_endpoint)
+        StadiumController.upsert_stadiums()
 
         json_data = rss_feed.json()
 
