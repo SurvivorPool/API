@@ -34,9 +34,9 @@ class StandardLeagueAdvanceController:
                     advancing_teams.append(active_team)
                 active_team.upsert()
 
-        for team in deactivated_teams:
-            if team.user.receive_notifications:
-                send_email("Sorry, you've been eliminated", Config.MAIL_USERNAME, team.user, team)
+        #for team in deactivated_teams:
+        #    if team.user.receive_notifications:
+        #        send_email("Sorry, you've been eliminated", Config.MAIL_USERNAME, team.user, team)
 
         return {
             'deactivated_teams': deactivated_teams,
