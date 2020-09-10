@@ -3,13 +3,11 @@ from datetime import timedelta
 from models.game import GameModel
 from controllers.stadium import StadiumController
 from dateutil import parser
-from dateutil.tz import gettz
 import calendar
 import requests
 
 
 class GameController:
-    nfl_endpoint_old = 'https://feeds.nfl.com/feeds-rs/scores.json'
     nfl_endpoint = 'http://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'
 
     @classmethod
@@ -43,7 +41,7 @@ class GameController:
     @classmethod
     def update_games(cls):
         rss_feed = requests.get(cls.nfl_endpoint)
-        # StadiumController.upsert_stadiums()
+        StadiumController.upsert_stadiums()
 
         json_data = rss_feed.json()
 
@@ -52,14 +50,6 @@ class GameController:
 
         print(week_num)
         events = json_data['events']
-
-        # print(games)
-
-        default_score_info = {
-            'homeTeamScore': {'pointTotal': 0},
-            'visitorTeamScore': {'pointTotal': 0},
-            'phase': 'PREGAME', 'time': '15:00'
-        }
 
         for event in events:
             competitions = event['competitions']
@@ -94,8 +84,6 @@ class GameController:
 
                 game_date = parser.parse(competition['startDate'])
                 game_date_eastern = game_date - timedelta(hours=5)
-                print(game_date)
-                print(game_date_eastern)
                 day_of_week = calendar.day_name[game_date_eastern.weekday()]
                 site_id = competition['venue']['id']
                 game_model = GameModel(game_id, home_team_name, home_team_score, away_team_name, away_team_score,
@@ -108,10 +96,12 @@ class GameController:
                 game_model.quarter = status['period']
                 game_model.quarter_time = status['displayClock']
                 game_date = parser.parse(competition['startDate'])
-                day_of_week = calendar.day_name[game_date.weekday()]
+
+                game_date_eastern = game_date - timedelta(hours=5)
+                day_of_week = calendar.day_name[game_date_eastern.weekday()]
 
                 game_model.game_date = game_date
-                game_model.day_of_week = calendar.day_name[game_model.game_date.weekday()]
+                game_model.day_of_week = day_of_week
                 game_model.site_id = competition['venue']['id']
                 game_model.upsert()
 
