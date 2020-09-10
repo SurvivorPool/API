@@ -55,7 +55,7 @@ class PlayerTeamModel(db.Model):
         currently_picked_team = None
         
         if current_pick:
-            if current_pick.game.quarter != 'P':
+            if current_pick.game.has_started:
                 currently_picked_team = current_pick.nfl_team_name
 
         return {

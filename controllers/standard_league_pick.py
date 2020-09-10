@@ -21,7 +21,7 @@ class StandardLeaguePickController:
         if nfl_team is None:
             return {'message': 'Cannot find nfl_team with that name'}, 401
 
-        if game.quarter != 'P':
+        if game.has_started:
             return {
                        'message':
                            'This game has already started. Please try a different game.'
@@ -43,7 +43,7 @@ class StandardLeaguePickController:
             pick = PickModel(data['team_id'], data['game_id'], week,
                              data['nfl_team_name'])
         else:
-            if not pick.game.quarter.upper() == 'P':
+            if not pick.game.has_started:
                 return {'message': 'Current pick game already started. Cannot choose new team.'}, 401
 
             pick.game_id = data['game_id']

@@ -59,6 +59,8 @@ class GameController:
             home_team = next(filter(lambda team: team['homeAway'] == 'home', teams))
             away_team = next(filter(lambda team: team['homeAway'] == 'away', teams))
             status = event['status']
+            type = status['type']
+            has_started = not type['state'] == 'pre'
 
             game_model = GameModel.find_by_game_id(event['id'])
 
@@ -87,7 +89,7 @@ class GameController:
                 day_of_week = calendar.day_name[game_date_eastern.weekday()]
                 site_id = competition['venue']['id']
                 game_model = GameModel(game_id, home_team_name, home_team_score, away_team_name, away_team_score,
-                                       day_of_week, game_date, quarter, quarter_time, site_id, week_num)
+                                       day_of_week, game_date, quarter, quarter_time, site_id, week_num, has_started)
 
                 game_model.upsert()
             else:
@@ -95,6 +97,7 @@ class GameController:
                 game_model.away_team_score = away_team['score'] or 0
                 game_model.quarter = 'P' if status['period'] == 0 else status['period']
                 game_model.quarter_time = status['displayClock']
+                game_model.has_started = has_started
                 game_date = parser.parse(competition['startDate'])
 
                 game_date_eastern = game_date - timedelta(hours=5)
