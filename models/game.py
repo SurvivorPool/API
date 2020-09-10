@@ -73,7 +73,7 @@ class GameModel(db.Model):
 
     @classmethod
     def get_games_by_week(cls, week):
-        return cls.query.filter_by(week=week).order_by(cls.game_date).all()
+        return cls.query.filter_by(week=week).order_by(cls.game_date, cls.game_id).all()
 
     @classmethod
     def get_games_by_week_json(cls, week):
