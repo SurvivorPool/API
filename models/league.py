@@ -22,7 +22,7 @@ class LeagueModel(db.Model):
     completed = db.Column(db.Boolean, nullable=False, default=False, server_default="false")
     teams = db.relationship("PlayerTeamModel", order_by="desc(PlayerTeamModel.is_active), desc(PlayerTeamModel.streak)")
     league_type = db.relationship("LeagueTypeModel")
-    season = db.Column(db.Integer, nullable=False, default=2019, server_default="2019")
+    season = db.Column(db.Integer, nullable=False, default=2020, server_default="2020")
 
     def __init__(self, league_name, league_description, price):
         self.league_name = league_name
@@ -71,7 +71,7 @@ class LeagueModel(db.Model):
 
     @classmethod
     def find_all_leagues(cls):
-        return cls.query.filter_by(season=2019).order_by(cls.price).all()
+        return cls.query.filter_by(season=2020).order_by(cls.price).all()
 
     @classmethod
     def find_all_started_leagues(cls, current_week):
