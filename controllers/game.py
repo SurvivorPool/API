@@ -1,13 +1,16 @@
+from datetime import timedelta
+
 from models.game import GameModel
 from controllers.stadium import StadiumController
-from datetime import datetime
-import time
+from dateutil import parser
+from dateutil.tz import gettz
 import calendar
 import requests
 
 
 class GameController:
-    nfl_endpoint = 'https://feeds.nfl.com/feeds-rs/scores.json'
+    nfl_endpoint_old = 'https://feeds.nfl.com/feeds-rs/scores.json'
+    nfl_endpoint = 'http://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'
 
     @classmethod
     def get_losers_for_week(cls, week_num):
@@ -40,12 +43,17 @@ class GameController:
     @classmethod
     def update_games(cls):
         rss_feed = requests.get(cls.nfl_endpoint)
-        StadiumController.upsert_stadiums()
+        # StadiumController.upsert_stadiums()
 
         json_data = rss_feed.json()
 
-        week_num = json_data['week']
-        games = json_data['gameScores']
+        week_info = json_data['week']
+        week_num = week_info['number']
+
+        print(week_num)
+        events = json_data['events']
+
+        # print(games)
 
         default_score_info = {
             'homeTeamScore': {'pointTotal': 0},
@@ -53,53 +61,58 @@ class GameController:
             'phase': 'PREGAME', 'time': '15:00'
         }
 
-        for game in games:
-            schedule_info = game['gameSchedule']
-            score_info = game['score'] if game['score'] else default_score_info
-            home_score_info = score_info['homeTeamScore']
-            away_score_info = score_info['visitorTeamScore']
-            home_team_info = schedule_info['homeTeam']
-            away_team_info = schedule_info['visitorTeam']
-            site_info = schedule_info['site']
-            game_model = GameModel.find_by_game_id(schedule_info['gameKey'])
+        for event in events:
+            competitions = event['competitions']
+            competition = competitions[0]
+            teams = competition['competitors']
+
+            home_team = next(filter(lambda team: team['homeAway'] == 'home', teams))
+            away_team = next(filter(lambda team: team['homeAway'] == 'away', teams))
+            status = event['status']
+
+            game_model = GameModel.find_by_game_id(event['id'])
 
             if game_model is None:
-                game_id = schedule_info['gameKey']
-                home_team_name = home_team_info['nick']
-                home_team_score = home_score_info['pointTotal'] or 0
-                away_team_name = away_team_info['nick']
-                away_team_score = away_score_info['pointTotal'] or 0
+                game_id = event['id']
 
-                quarter = score_info['phase'][0] if len(score_info['phase']) > 3 else score_info['phase']
+                if 'name' not in home_team['team']:
+                    home_team_name = home_team['team']['displayName']
+                else:
+                    home_team_name = home_team['team']['name']
 
-                quarter_time = score_info['time']
+                if 'name' not in away_team['team']:
+                    away_team_name = away_team['team']['displayName']
+                else:
+                    away_team_name = away_team['team']['name']
 
-                game_time_24hr = time.strptime(schedule_info['gameTimeEastern'], "%H:%M:%S")
-                game_time = time.strftime("%I:%M %p", game_time_24hr)
-                game_time = time.strptime(game_time, "%I:%M %p")
+                home_team_score = home_team['score'] or 0
+                away_team_score = away_team['score'] or 0
 
-                game_date = datetime.strptime(schedule_info['gameDate'] + ' ' + time.strftime('%I:%M %p', game_time),
-                                              '%m/%d/%Y %I:%M %p')
+                quarter = status['period']
 
-                day_of_week = calendar.day_name[game_date.weekday()]
-                site_id = site_info['siteId']
+                quarter_time = status['displayClock']
+
+                game_date = parser.parse(competition['startDate'])
+                game_date_eastern = game_date - timedelta(hours=5)
+                print(game_date)
+                print(game_date_eastern)
+                day_of_week = calendar.day_name[game_date_eastern.weekday()]
+                site_id = competition['venue']['id']
                 game_model = GameModel(game_id, home_team_name, home_team_score, away_team_name, away_team_score,
                                        day_of_week, game_date, quarter, quarter_time, site_id, week_num)
+
                 game_model.upsert()
             else:
-                game_model.home_team_score = home_score_info['pointTotal'] or 0
-                game_model.away_team_score = away_score_info['pointTotal'] or 0
-                game_model.quarter = score_info['phase'][0] if len(score_info['phase']) > 3 else score_info['phase']
-                game_model.quarter_time = score_info['time']
-                game_time_24hr = time.strptime(schedule_info['gameTimeEastern'], "%H:%M:%S")
-                game_time = time.strftime("%I:%M %p", game_time_24hr)
-                game_time = time.strptime(game_time, "%I:%M %p")
+                game_model.home_team_score = home_team['score'] or 0
+                game_model.away_team_score = away_team['score'] or 0
+                game_model.quarter = status['period']
+                game_model.quarter_time = status['displayClock']
+                game_date = parser.parse(competition['startDate'])
+                day_of_week = calendar.day_name[game_date.weekday()]
 
-                game_model.game_date = datetime.strptime(schedule_info['gameDate'] + ' '
-                                                         + time.strftime('%I:%M %p', game_time),
-                                                         '%m/%d/%Y %I:%M %p')
+                game_model.game_date = game_date
                 game_model.day_of_week = calendar.day_name[game_model.game_date.weekday()]
-                game_model.site_id = site_info['siteId']
+                game_model.site_id = competition['venue']['id']
                 game_model.upsert()
 
         return_games = GameModel.get_games_by_week(week_num)
