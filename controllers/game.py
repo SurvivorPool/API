@@ -78,7 +78,7 @@ class GameController:
                 home_team_score = home_team['score'] or 0
                 away_team_score = away_team['score'] or 0
 
-                quarter = status['period']
+                quarter = 'P' if status['period'] == 0 else status['period']
 
                 quarter_time = status['displayClock']
 
@@ -93,7 +93,7 @@ class GameController:
             else:
                 game_model.home_team_score = home_team['score'] or 0
                 game_model.away_team_score = away_team['score'] or 0
-                game_model.quarter = status['period']
+                game_model.quarter = 'P' if status['period'] == 0 else status['period']
                 game_model.quarter_time = status['displayClock']
                 game_date = parser.parse(competition['startDate'])
 
