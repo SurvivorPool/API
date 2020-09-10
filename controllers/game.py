@@ -78,7 +78,7 @@ class GameController:
                 home_team_score = home_team['score'] or 0
                 away_team_score = away_team['score'] or 0
 
-                quarter = 'P' if status['period'] == 0 or status['type']['state'] != 'pre' else status['period']
+                quarter = 'P' if status['period'] == 0 or status['type']['state'] == 'pre' else status['period']
 
                 quarter_time = status['displayClock']
 
