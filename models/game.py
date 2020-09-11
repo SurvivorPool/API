@@ -46,6 +46,18 @@ class GameModel(db.Model):
     def find_by_game_id(cls, game_id):
         return cls.query.filter_by(game_id=game_id).first()
 
+    @classmethod
+    def get_quarter_string(cls, quarter):
+        if quarter == '1':
+            return '1st'
+        if quarter == '2':
+            return '2nd'
+        if quarter == '3':
+            return '3rd'
+        if quarter == '4':
+            return '4th'
+        return quarter
+
     def json(self):
         return {
             'game_id': self.game_id,
@@ -56,7 +68,7 @@ class GameModel(db.Model):
             'day_of_week': self.day_of_week,
             'time': datetime.strftime(self.game_date, '%I:%MM %p'),
             'game_date': datetime.strftime(self.game_date, '%Y-%m-%d'),
-            'quarter': self.quarter,
+            'quarter': GameModel.get_quarter_string(self.quarter),
             'quarter_time': self.quarter_time,
             'stadium_info': self.stadium_info.json(),
             'week': self.week,
