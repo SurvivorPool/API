@@ -19,10 +19,12 @@ class GameModel(db.Model):
     week = db.Column(db.Integer)
     has_started = db.Column(db.Boolean, default="false")
     stadium_id = db.Column(db.Integer, db.ForeignKey('stadiums.stadium_id'))
+    odds_id = db.Column(db.Integer, db.ForeignKey('odds.odds_id'))
 
     home_team_info = db.relationship('NFLTeamModel', foreign_keys=[home_team_name])
     away_team_info = db.relationship('NFLTeamModel', foreign_keys=[away_team_name])
     stadium_info = db.relationship('StadiumModel')
+    odds_info = db.relationship('OddsModel')
 
     def __init__(self, game_id, home_team_name, home_team_score, away_team_name,
                  away_team_score, day_of_week, game_date, quarter, quarter_time, stadium_id, week, has_started):
@@ -72,7 +74,8 @@ class GameModel(db.Model):
             'quarter_time': self.quarter_time,
             'stadium_info': self.stadium_info.json(),
             'week': self.week,
-            'has_started': self.has_started
+            'has_started': self.has_started,
+            'odds_info': self.odds_info.json() if self.odds_info else []
         }
 
     def upsert(self):

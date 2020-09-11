@@ -1,6 +1,7 @@
 from datetime import timedelta
 
 from models.game import GameModel
+from models.odds import OddsModel
 from controllers.stadium import StadiumController
 from dateutil import parser
 import calendar
@@ -62,10 +63,12 @@ class GameController:
             type = status['type']
             has_started = not type['state'] == 'pre'
 
-            game_model = GameModel.find_by_game_id(event['id'])
+            game_id = event['id']
+
+
+            game_model = GameModel.find_by_game_id(game_id)
 
             if game_model is None:
-                game_id = event['id']
 
                 if 'name' not in home_team['team']:
                     home_team_name = home_team['team']['displayName']
@@ -93,6 +96,7 @@ class GameController:
                 game_date_eastern = game_date - timedelta(hours=5)
                 day_of_week = calendar.day_name[game_date_eastern.weekday()]
                 site_id = competition['venue']['id']
+
                 game_model = GameModel(game_id, home_team_name, home_team_score, away_team_name, away_team_score,
                                        day_of_week, game_date, quarter, quarter_time, site_id, week_num, has_started)
 
@@ -119,7 +123,24 @@ class GameController:
                 game_model.game_date = game_date
                 game_model.day_of_week = day_of_week
                 game_model.site_id = competition['venue']['id']
+
                 game_model.upsert()
+
+            if 'odds' in competition:
+                odds = competition['odds']
+
+                if odds:
+                    odds_model = OddsModel.find_by_game_id(game_id)
+
+                    if odds_model is None:
+                        odds_model = OddsModel(game_id, odds[0]['details'], odds[0]['overUnder'])
+                        odds_model.upsert()
+                    else:
+                        odds_model.details = odds[0]['details']
+                        odds_model.over_under = odds[0]['overUnder']
+                        odds_model.upsert()
+
+                game_model.odds_id = odds_model.odds_id
 
         return_games = GameModel.get_games_by_week(week_num)
         return {'games': [game.json() for game in return_games]}
