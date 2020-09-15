@@ -1,5 +1,4 @@
 import app
-from sqlalchemy.sql.expression import and_
 from .game import GameModel
 from .user import UserModel
 from .league_type import LeagueTypes
