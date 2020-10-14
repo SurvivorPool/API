@@ -11,7 +11,7 @@ class StandardLeagueAdvanceController:
 
     @classmethod
     def advance_week(cls, league):
-        #GameController.update_games()
+        GameController.update_games()
         week_num = GameModel.get_max_week()
 
         active_teams = PlayerTeamModel.get_active_teams_in_league(league.league_id)
