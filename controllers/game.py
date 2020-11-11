@@ -49,7 +49,6 @@ class GameController:
         week_info = json_data['week']
         week_num = week_info['number']
 
-        print(week_num)
         events = json_data['events']
 
         for event in events:
@@ -64,7 +63,6 @@ class GameController:
             has_started = not type['state'] == 'pre'
 
             game_id = event['id']
-
 
             game_model = GameModel.find_by_game_id(game_id)
 
@@ -132,15 +130,20 @@ class GameController:
                 if odds:
                     odds_model = OddsModel.find_by_game_id(game_id)
 
+                    print("HERE HERE HERE 1")
                     if odds_model is None:
-                        odds_model = OddsModel(game_id, odds[0]['details'], odds[0]['overUnder'])
-                        odds_model.upsert()
+                        print("HERE HERE HERE 2")
+                        if 'details' in odds[0] and 'overUnder' in odds[0]:
+                            print("HERE HERE HERE 3")
+                            odds_model = OddsModel(game_id, odds[0]['details'], odds[0]['overUnder'])
+                            odds_model.upsert()
                     else:
                         odds_model.details = odds[0]['details']
                         odds_model.over_under = odds[0]['overUnder']
                         odds_model.upsert()
 
-                game_model.odds_id = odds_model.odds_id
+                if odds_model:
+                    game_model.odds_id = odds_model.odds_id
 
         return_games = GameModel.get_games_by_week(week_num)
         return {'games': [game.json() for game in return_games]}
