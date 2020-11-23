@@ -75,7 +75,6 @@ def advance_week():
 
         deactivated_teams += (teams_dict['deactivated_teams'])
         advancing_teams += (teams_dict['advancing_teams'])
-        print("DONE ADVANCING")
 
 
 from models import GameModel, LeagueModel

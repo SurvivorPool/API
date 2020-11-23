@@ -130,11 +130,8 @@ class GameController:
                 if odds:
                     odds_model = OddsModel.find_by_game_id(game_id)
 
-                    print("HERE HERE HERE 1")
                     if odds_model is None:
-                        print("HERE HERE HERE 2")
                         if 'details' in odds[0] and 'overUnder' in odds[0]:
-                            print("HERE HERE HERE 3")
                             odds_model = OddsModel(game_id, odds[0]['details'], odds[0]['overUnder'])
                             odds_model.upsert()
                     else:
