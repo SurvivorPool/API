@@ -57,8 +57,8 @@ def email_request():
 
 def advance_week():
     week_num = GameModel.get_max_week()
-    # if GameModel.week_has_unfinished_games(week_num):
-    #     return {'message': 'Not all games finished'}
+    if GameModel.week_has_unfinished_games(week_num):
+        return {'message': 'Not all games finished'}
 
     all_leagues = LeagueModel.find_all_started_leagues(week_num)
 
