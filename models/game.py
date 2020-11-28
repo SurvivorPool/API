@@ -12,7 +12,7 @@ class GameModel(db.Model):
     home_team_score = db.Column(db.Integer, default=0)
     away_team_name = db.Column(db.String(45), db.ForeignKey('nfl_teams.nickname'))
     away_team_score = db.Column(db.Integer, default=0)
-    day_of_week = db.Column(db.String(8))
+    day_of_week = db.Column(db.String(12))
     game_date = db.Column(db.DateTime)
     quarter = db.Column(db.String(3))
     quarter_time = db.Column(db.String(10))
