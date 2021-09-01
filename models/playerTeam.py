@@ -126,7 +126,7 @@ class PlayerTeamModel(db.Model):
 
     @classmethod
     def get_all_player_teams(cls):
-        return cls.query.join(cls.league).filter_by(season=2020)
+        return cls.query.join(cls.league).filter_by(season=2021)
 
     @classmethod
     def get_active_teams_in_league(cls, league_id):
