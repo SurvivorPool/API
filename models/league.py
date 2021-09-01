@@ -70,7 +70,7 @@ class LeagueModel(db.Model):
 
     @classmethod
     def find_all_leagues(cls):
-        return cls.query.filter_by(season=2020).order_by(cls.price).all()
+        return cls.query.filter_by(season=2021).order_by(cls.price).all()
 
     @classmethod
     def find_all_started_leagues(cls, current_week):
