@@ -21,7 +21,7 @@ class LeagueModel(db.Model):
     completed = db.Column(db.Boolean, nullable=False, default=False, server_default="false")
     teams = db.relationship("PlayerTeamModel", order_by="desc(PlayerTeamModel.is_active), desc(PlayerTeamModel.streak)")
     league_type = db.relationship("LeagueTypeModel")
-    season = db.Column(db.Integer, nullable=False, default=2020, server_default="2020")
+    season = db.Column(db.Integer, nullable=False, default=2021, server_default="2021")
 
     def __init__(self, league_name, league_description, price):
         self.league_name = league_name
