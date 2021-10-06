@@ -13,7 +13,6 @@ class StadiumController:
 
         events = json_data['events']
 
-
         for event in events:
             competitions = event['competitions']
             competition = competitions[0]
@@ -25,25 +24,19 @@ class StadiumController:
                 new_stadium_id = stadium_info['id']
                 new_stadium_city = stadium_info['address']['city']
                 new_stadium_name = stadium_info['fullName']
-                new_stadium_state = stadium_info['address']['state']
+                new_stadium_state = ""
+
+                if stadium_info["address"].has_key("state"):
+                    new_stadium_state = stadium_info["address"]["state"]
+
                 new_stadium_roof_type = "NA"
-                new_stadium = StadiumModel(new_stadium_id, new_stadium_city, new_stadium_name, new_stadium_state, new_stadium_roof_type) 
+                new_stadium = StadiumModel(
+                    new_stadium_id, new_stadium_city, new_stadium_name, new_stadium_state, new_stadium_roof_type)
                 new_stadium.upsert()
 
-
     @classmethod
-    def populate_stadiums(cls): 
+    def populate_stadiums(cls):
         cls.upsert_stadiums()
 
         stadiums = StadiumModel.find_all()
         return {'stadiums': [stadium.json() for stadium in stadiums]}
-
-
-
-
-
-
-
-
-
-
