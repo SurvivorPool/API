@@ -24,11 +24,7 @@ class StadiumController:
                 new_stadium_id = stadium_info['id']
                 new_stadium_city = stadium_info['address']['city']
                 new_stadium_name = stadium_info['fullName']
-                new_stadium_state = ""
-
-                if stadium_info["address"].has_key("state"):
-                    new_stadium_state = stadium_info["address"]["state"]
-
+                new_stadium_state = stadium_info["address"]["state"] if "state" in stadium_info["address"] else ""
                 new_stadium_roof_type = "NA"
                 new_stadium = StadiumModel(
                     new_stadium_id, new_stadium_city, new_stadium_name, new_stadium_state, new_stadium_roof_type)
